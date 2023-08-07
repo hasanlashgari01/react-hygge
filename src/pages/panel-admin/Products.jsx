@@ -126,7 +126,9 @@ function Products() {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                     />
-                    {form.errors.description && form.touched.description && <span>{form.errors.description}</span>}
+                    {form.errors.description && form.touched.description && (
+                        <span>{form.errors.description}</span>
+                    )}
                 </div>
                 <div>
                     <input
@@ -150,7 +152,9 @@ function Products() {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                     />
-                    {form.errors.ability && form.touched.ability && <span>{form.errors.ability}</span>}
+                    {form.errors.ability && form.touched.ability && (
+                        <span>{form.errors.ability}</span>
+                    )}
                 </div>
                 <div>
                     <input
@@ -161,7 +165,9 @@ function Products() {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                     />
-                    {form.errors.categoryID && form.touched.categoryID && <span>{form.errors.categoryID}</span>}
+                    {form.errors.categoryID && form.touched.categoryID && (
+                        <span>{form.errors.categoryID}</span>
+                    )}
                 </div>
                 <div>
                     <input type="submit" name="off" value="Add Product" />
@@ -187,7 +193,11 @@ function Products() {
                                 <td className="flex gap-x-5">
                                     <button
                                         onClick={() =>
-                                            setIsModal({ status: "pending", id: product._id, cb: deleteProduct })
+                                            setIsModal({
+                                                status: "pending",
+                                                id: product._id,
+                                                cb: deleteProduct,
+                                            })
                                         }>
                                         Delete
                                     </button>

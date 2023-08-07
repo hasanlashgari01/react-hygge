@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useFormik } from "formik";
 import { ToastContainer } from "react-toastify";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import SubTitle from "../../components/main/SubTitle";
@@ -46,6 +46,21 @@ const validate = values => {
 };
 
 function Register() {
+    const form = useFormik({
+        initialValues: {
+            fullName: "",
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        },
+        validate,
+        onSubmit: (values, { setSubmitting }) => {
+            setSubmitting(false);
+            handleSubmit(values);
+        },
+    });
+
     const handleSubmit = values => {
         fetch("http://localhost:4000/auth/register", {
             method: "POST",
@@ -68,147 +83,109 @@ function Register() {
                     <SubTitle subtitle="- Sign Up" />
                     <Title title="Create Account" />
                 </div>
-                <Formik
-                    validate={validate}
-                    initialValues={{ fullName: "", username: "", email: "", password: "", confirmPassword: "" }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setSubmitting(false);
-                        handleSubmit(values);
-                    }}>
-                    {({ touched, errors, isSubmitting }) => (
-                        <Form className="laptop:w-[496px] laptop:mx-auto mt-14 tablet:mt-16 bigDesktop:mt-[72px]">
-                            <div>
-                                <div className="mb-5">
-                                    <h5 className="form-text">Fullname</h5>
-                                    <Field
-                                        type="text"
-                                        name="fullName"
-                                        className={`form-input w-full ${
-                                            touched.fullName && errors.fullName ? "outline-red focus:outline-red" : ""
-                                        }`}
-                                    />
-                                    <div
-                                        className={`text-sm transition-all duration-300
-                                        ${
-                                            !errors.fullName
-                                                ? "-translate-y-full z-0 opacity-0"
-                                                : "text-red translate-y-0 opacity-100"
-                                        }`}>
-                                        <ErrorMessage name="fullName" />
-                                    </div>
-                                </div>
-                                <div className="mb-5">
-                                    <h5 className="form-text">Username</h5>
-                                    <Field
-                                        type="text"
-                                        name="username"
-                                        className={`form-input w-full ${
-                                            touched.username && errors.username ? "outline-red focus:outline-red" : ""
-                                        }`}
-                                    />
-                                    <div
-                                        className={`text-sm transition-all duration-300
-                                        ${
-                                            !errors.username
-                                                ? "-translate-y-full z-0 opacity-0"
-                                                : "text-red translate-y-0 opacity-100"
-                                        }`}>
-                                        <ErrorMessage name="username" />
-                                    </div>
-                                </div>
-                                <div className="mb-5">
-                                    <h5 className="form-text">Email Address</h5>
-                                    <Field
-                                        type="email"
-                                        name="email"
-                                        className={`form-input w-full ${
-                                            touched.email && errors.email ? "outline-red focus:outline-red" : ""
-                                        }`}
-                                    />
-                                    <div
-                                        className={`text-sm transition-all duration-300
-                                        ${
-                                            !errors.email
-                                                ? "-translate-y-full z-0 opacity-0"
-                                                : "text-red translate-y-0 opacity-100"
-                                        }`}>
-                                        <ErrorMessage name="email" />
-                                    </div>
-                                </div>
-                                <div className="mb-5">
-                                    <h5 className="form-text">Password</h5>
-                                    <Field
-                                        type="password"
-                                        name="password"
-                                        className={`form-input w-full ${
-                                            touched.password && errors.password ? "outline-red focus:outline-red" : ""
-                                        }`}
-                                    />
-                                    <div
-                                        className={`text-sm transition-all duration-300
-                                        ${
-                                            !errors.password
-                                                ? "-translate-y-full z-0 opacity-0"
-                                                : "text-red translate-y-0 opacity-100"
-                                        }`}>
-                                        <ErrorMessage name="password" />
-                                    </div>
-                                </div>
-                                <div className="">
-                                    <h5 className="form-text">Confirm Passowrd</h5>
-                                    <Field
-                                        type="password"
-                                        name="confirmPassword"
-                                        className={`form-input w-full ${
-                                            touched.confirmPassword && errors.confirmPassword
-                                                ? "outline-red focus:outline-red"
-                                                : ""
-                                        }`}
-                                    />
-                                    <div
-                                        className={`text-sm transition-all duration-300
-                                        ${
-                                            !errors.confirmPassword
-                                                ? "-translate-y-full z-0 opacity-0"
-                                                : "text-red translate-y-0 opacity-100"
-                                        }`}>
-                                        <ErrorMessage name="confirmPassword" />
-                                    </div>
-                                </div>
 
-                                <div className="mt-4 bigDesktop:mt-6 w-full h-0.5 bg-grey-1 dark:bg-grey-2 rounded-2xl overflow-hidden">
-                                    <div className="w-1/5 h-full bg-green-100 transition-all duration-500"></div>
-                                </div>
-                            </div>
-                            <div className="mt-10 tablet:mt-12">
-                                <input id="agree-terms" type="checkbox" className="w-4 h-4 rounded-full" />
-                                <label
-                                    htmlFor="agree-terms"
-                                    className="ml-4 text-grey-dark-100 dark:text-grey-light-100 laptop:text-xl/8  font-normal select-none">
-                                    I have read and agree to{" "}
-                                    <SmoothScrollLink to="#" className=" laptop:text-xl/8 font-semibold underline">
-                                        terms & conditions
-                                    </SmoothScrollLink>
-                                </label>
-                            </div>
-                            <div className="flex flex-col tablet:flex-row gap-y-4 tablet:gap-x-6 mt-14 tablet:mt-12">
-                                <input
-                                    type="submit"
-                                    value={isSubmitting ? "Loading..." : "Create account"}
-                                    className={`w-full bg-green-100 py-3 text-center rounded-full text-grey-light-100 font-bold ${
-                                        isSubmitting ? "opacity-30 cursor-default" : "cursor-pointer"
-                                    }`}
-                                    disabled={isSubmitting}
-                                />
-                                <SmoothScrollLink
-                                    to="/login"
-                                    className="flex-1 py-3 text-center rounded-full text-grey-dark-100 dark:text-grey-light-100 hover:bg-green-100 hover:text-white font-bold border-2 border-grey-1 transition-colors">
-                                    Login
-                                </SmoothScrollLink>
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
+                <form
+                    className="laptop:w-[496px] laptop:mx-auto mt-14 tablet:mt-16 bigDesktop:mt-[72px]"
+                    onSubmit={form.handleSubmit}>
+                    <div className="child:form-wrapper">
+                        <div>
+                            <input
+                                type="text"
+                                name="fullName"
+                                placeholder="fullName"
+                                value={form.values.fullName}
+                                onChange={form.handleChange}
+                                onBlur={form.handleBlur}
+                            />
+                            {form.errors.fullName && form.touched.fullName && (
+                                <span>{form.errors.fullName}</span>
+                            )}
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="username"
+                                value={form.values.username}
+                                onChange={form.handleChange}
+                                onBlur={form.handleBlur}
+                            />
+                            {form.errors.username && form.touched.username && (
+                                <span>{form.errors.username}</span>
+                            )}
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="email"
+                                placeholder="email"
+                                value={form.values.email}
+                                onChange={form.handleChange}
+                                onBlur={form.handleBlur}
+                            />
+                            {form.errors.email && form.touched.email && (
+                                <span>{form.errors.email}</span>
+                            )}
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="password"
+                                placeholder="password"
+                                value={form.values.password}
+                                onChange={form.handleChange}
+                                onBlur={form.handleBlur}
+                            />
+                            {form.errors.password && form.touched.password && (
+                                <span>{form.errors.password}</span>
+                            )}
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name="confirmPassword"
+                                placeholder="confirmPassword"
+                                value={form.values.confirmPassword}
+                                onChange={form.handleChange}
+                                onBlur={form.handleBlur}
+                            />
+                            {form.errors.confirmPassword && form.touched.confirmPassword && (
+                                <span>{form.errors.confirmPassword}</span>
+                            )}
+                        </div>
+                    </div>
+                    <div>
+                        <div className="bigDesktop:mt-6 w-full h-0.5 bg-grey-1 dark:bg-grey-2 rounded-2xl overflow-hidden">
+                            <div className="w-1/5 h-full bg-green-100 transition-all duration-500"></div>
+                        </div>
+                        <span>Message</span>
+                    </div>
+                    <div className="mt-10 tablet:mt-12">
+                        <input id="agree-terms" type="checkbox" className="w-4 h-4" />
+                        <label
+                            htmlFor="agree-terms"
+                            className="ml-4 text-grey-dark-100 dark:text-grey-light-100 text-base font-normal select-none">
+                            I have read and agree to{" "}
+                            <SmoothScrollLink
+                                to="#"
+                                className="text-green-100 text-base font-semibold underline">
+                                terms & conditions
+                            </SmoothScrollLink>
+                        </label>
+                    </div>
+                    <div className="flex flex-col tablet:flex-row gap-y-4 tablet:gap-x-6 mt-14 tablet:mt-12">
+                        <input
+                            type="submit"
+                            value="Create account"
+                            className="w-full bg-green-100 py-3 text-center rounded-full text-grey-light-100 font-bold cursor-pointer"
+                        />
+                        <SmoothScrollLink
+                            to="/login"
+                            className="w-full py-3 text-center rounded-full text-grey-dark-100 dark:text-grey-light-100 hover:bg-green-100 hover:text-white font-bold border-2 border-grey-1 transition-colors">
+                            Login
+                        </SmoothScrollLink>
+                    </div>
+                </form>
             </div>
             <Footer />
         </div>
