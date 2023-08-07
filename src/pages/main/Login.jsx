@@ -58,8 +58,8 @@ function Login() {
             })
             .then(result => {
                 toastCustom("success", "You're login was successfully");
+                console.log(result);
                 authContext.login(result.user, result.accessToken);
-                // navigate("/");
             })
             .catch(() => {
                 toastCustom("error", "Email or password is wrong");

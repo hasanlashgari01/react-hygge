@@ -1,16 +1,12 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../context/authContext";
 
 function LoginPrivate({ children }) {
-    const authContext = useContext(AuthContext);
+    const { isLoggedIn } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        authContext.isLoggedIn && navigate("/");
-    });
-
-    return <>{authContext.isLoggedIn ? navigate("/") : <>{children}</>}</>;
+    return <>{!isLoggedIn ? <>{children}</> : navigate("/")}</>;
 }
 
 export default LoginPrivate;

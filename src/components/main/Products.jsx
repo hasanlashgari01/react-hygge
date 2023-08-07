@@ -11,7 +11,7 @@ function Products() {
     useEffect(() => {
         fetch("http://localhost:4000/api/products")
             .then(res => res.json())
-            .then(result => setProducts(result.products.slice(0, 8)));
+            .then(result => result.products && setProducts(result.products.slice(0, 8)));
     }, []);
 
     return (
@@ -21,7 +21,11 @@ function Products() {
                 <Title title="Explore our Products" />
             </div>
             <div className="grid grid-cols-1 mobile:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-x-12 laptop:gap-x-14 desktop:gap-x-12 gap-y-16 mt-14">
-                {products ? products.map(product => <Product key={product._id} product={product} />) : <ErrorMessage title="There is no products" />}
+                {products ? (
+                    products.map(product => <Product key={product._id} product={product} />)
+                ) : (
+                    <ErrorMessage title="There is no products" />
+                )}
             </div>
             {products && products.length > 0 && (
                 <SmoothScrollLink

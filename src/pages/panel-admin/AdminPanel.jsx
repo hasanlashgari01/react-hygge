@@ -1,4 +1,4 @@
-import { Outlet } from "react-router";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../../layouts/panel-admin/Sidebar";
 import Topbar from "../../layouts/panel-admin/Topbar";
 
