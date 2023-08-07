@@ -6,6 +6,10 @@ function PAdminPrivate({ children }) {
     const authContext = useContext(AuthContext);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        !authContext.isLoggedIn && navigate("/");
+    }, [authContext.isLoggedIn]);
+
     return <>{authContext.userInfos.role === "ADMIN" ? <>{children}</> : navigate("/")}</>;
 }
 
