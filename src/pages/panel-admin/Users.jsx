@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { ToastContainer } from "react-toastify";
+import useToken from "../../hooks/useToken";
 import toastCustom from "../../util/toast";
 import SwalModal from "../../util/SwalModal";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -10,7 +11,7 @@ function Users() {
 
     const [setIsModal] = SwalModal();
     const navigate = useNavigate();
-    const token = JSON.parse(localStorage.getItem("user"));
+    const token = useToken();
     const BASE_URL = "http://localhost:4000/api/users";
 
     useEffect(() => {
@@ -31,7 +32,7 @@ function Users() {
                     } else if (result.status === 404) {
                         setUsers(null);
                     } else {
-                        setUsers(result.users);
+                        setUsers(result);
                     }
                 });
         }
@@ -96,15 +97,25 @@ function Users() {
                                 <td className="flex gap-x-2.5">
                                     <button
                                         className="w-16 bg-slate-200"
-                                        onClick={() => setAdmin(user._id, user.fullName, user.role)}>
+                                        onClick={() =>
+                                            setAdmin(user._id, user.fullName, user.role)
+                                        }>
                                         {user.role === "USER" ? "Admin" : "user"}
                                     </button>
                                     <button
                                         className="w-16 bg-red text-white"
-                                        onClick={() => setIsModal({ status: "pending", id: user._id, cb: deleteUser })}>
+                                        onClick={() =>
+                                            setIsModal({
+                                                status: "pending",
+                                                id: user._id,
+                                                cb: deleteUser,
+                                            })
+                                        }>
                                         Delete
                                     </button>
-                                    <button className="w-16 bg-slate-200" onClick={() => banUser(user._id)}>
+                                    <button
+                                        className="w-16 bg-slate-200"
+                                        onClick={() => banUser(user._id)}>
                                         Ban
                                     </button>
                                 </td>

@@ -22,7 +22,6 @@ function App() {
             })
                 .then(res => res.json())
                 .then(userData => {
-                    console.log(userData.user);
                     setIsLoggedIn(true);
                     setUserInfos(userData.user);
                 })

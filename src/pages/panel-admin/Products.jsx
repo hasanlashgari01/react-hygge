@@ -5,12 +5,13 @@ import { ToastContainer } from "react-toastify";
 import ErrorMessage from "../../components/ErrorMessage";
 import SwalModal from "../../util/SwalModal";
 import toastCustom from "../../util/toast";
+import useToken from "../../hooks/useToken";
 
 function Products() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [setIsModal] = SwalModal();
-    const token = JSON.parse(localStorage.getItem("user"));
+    const token = useToken();
     const form = useFormik({
         initialValues: {
             image: "product",
@@ -55,7 +56,7 @@ function Products() {
                     if (result.statusCode === 401) {
                         navigate("/");
                     } else {
-                        setProducts(result.products);
+                        setProducts(result);
                     }
                 });
         }

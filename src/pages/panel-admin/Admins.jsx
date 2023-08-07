@@ -3,12 +3,13 @@ import { useNavigate } from "react-router";
 import { ToastContainer } from "react-toastify";
 import toastCustom from "../../util/toast";
 import ErrorMessage from "../../components/ErrorMessage";
+import useToken from "../../hooks/useToken";
 
 function Admins() {
     const [admins, setAdmins] = useState([]);
 
     const navigate = useNavigate();
-    const token = JSON.parse(localStorage.getItem("user"));
+    const token = useToken();
     const BASE_URL = "http://localhost:4000/api/admins";
 
     useEffect(() => {
@@ -27,7 +28,7 @@ function Admins() {
                     if (result.statusCode === 401) {
                         navigate("/");
                     } else {
-                        setAdmins(result.admins);
+                        setAdmins(result);
                     }
                 });
         }
