@@ -54,7 +54,7 @@ function App() {
     */
 
     return (
-        <div className="bg-white dark:bg-grey-3 transition-dark">
+        <div className="bg-white dark:bg-grey-3 transition-custom">
             <AuthContext.Provider value={{ isLoggedIn, token, userInfos, login, logout }}>
                 {/* <CartContext.Provider
                     value={{

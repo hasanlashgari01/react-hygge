@@ -88,7 +88,7 @@ function Categories() {
                             <SwiperSlide key={category._id}>
                                 <SmoothScrollLink
                                     to={`http://localhost:5173/category/${category.name}`}
-                                    className="group inline-flex flex-col justify-center items-center w-32 h-32 bg-grey-1 dark:bg-grey-2 hover:bg-green-100/70 dark:hover:bg-green-100/70 rounded-3xl transition-dark">
+                                    className="group inline-flex flex-col justify-center items-center w-32 h-32 bg-grey-1 dark:bg-grey-2 hover:bg-green-100/70 dark:hover:bg-green-100/70 rounded-3xl transition-custom">
                                     <svg className="w-8 h-8 text-green-100 group-hover:text-white transition-colors">
                                         <use href={`#${category.icon}`}></use>
                                     </svg>

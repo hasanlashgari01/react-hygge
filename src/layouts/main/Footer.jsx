@@ -27,7 +27,7 @@ function Footer() {
             <div className="grid grid-cols-2 laptop:grid-cols-4 gap-y-14 gap-x-16 desktop:pl-14">
                 <div>
                     <div className="mb-6 tablet:mb-8">
-                        <div className="mb-4 tablet:mb-6 child:transition-dark">
+                        <div className="mb-4 tablet:mb-6 child:transition-custom">
                             <svg className="hidden tablet:inline-block w-[154px] h-[48px] dark:text-white">
                                 <use href="#logo-tablet"></use>
                             </svg>
@@ -35,29 +35,29 @@ function Footer() {
                                 <use href="#logo-mobile"></use>
                             </svg>
                         </div>
-                        <span className="min-w-[134px] text-grey-dark-100 dark:text-grey-light-100 text-sm/[24px] font-normal] transition-dark">
+                        <span className="min-w-[134px] text-grey-dark-100 dark:text-grey-light-100 text-sm/[24px] font-normal] transition-custom">
                             © 2020 - All rights reserved
                         </span>
                     </div>
                     <div className="flex flex-col mobile:flex-row gap-x-6 mb-12">
-                        <div className="flex justify-center items-center w-12 h-12 tablet:bg-grey-1 tablet:dark:bg-grey-2 rounded-full transition-dark">
+                        <div className="flex justify-center items-center w-12 h-12 tablet:bg-grey-1 tablet:dark:bg-grey-2 rounded-full transition-custom">
                             <svg className="w-6 h-6 dark:text-white">
                                 <use href="#instagram"></use>
                             </svg>
                         </div>
-                        <div className="flex justify-center items-center w-12 h-12 tablet:bg-grey-1 tablet:dark:bg-grey-2 rounded-full transition-dark">
+                        <div className="flex justify-center items-center w-12 h-12 tablet:bg-grey-1 tablet:dark:bg-grey-2 rounded-full transition-custom">
                             <svg className="w-6 h-6 dark:text-white">
                                 <use href="#twitter"></use>
                             </svg>
                         </div>
-                        <div className="flex justify-center items-center w-12 h-12 tablet:bg-grey-1 tablet:dark:bg-grey-2 rounded-full transition-dark">
+                        <div className="flex justify-center items-center w-12 h-12 tablet:bg-grey-1 tablet:dark:bg-grey-2 rounded-full transition-custom">
                             <svg className="w-6 h-6 dark:text-white">
                                 <use href="#facebook"></use>
                             </svg>
                         </div>
                     </div>
                     <div
-                        className="relative w-14 h-8 p-1 bg-grey-1 dark:bg-grey-2 shadow-md rounded-full select-none cursor-pointer transition-dark"
+                        className="relative w-14 h-8 p-1 bg-grey-1 dark:bg-grey-2 shadow-md rounded-full select-none cursor-pointer transition-custom"
                         onClick={themeHandler}>
                         <span className={`darkMode flex justify-center items-center ${isDark ? "left-1/2" : "left-1"}`}>
                             <svg className="w-6 h-6">

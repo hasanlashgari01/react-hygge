@@ -11,24 +11,24 @@ function Header() {
 
     return (
         <>
-            <div className="container sticky top-0 py-5 z-30 flex justify-between items-center bg-white dark:bg-grey-3 transition-dark child:transition-dark">
+            <div className="container sticky top-0 py-5 z-30 flex justify-between items-center bg-white dark:bg-grey-3 transition-custom child:transition-custom">
                 {/* Logo Laptop */}
-                <svg className="hidden laptop:inline-block w-[154px] h-[48px] dark:text-white transition-dark">
+                <svg className="hidden laptop:inline-block w-[154px] h-[48px] dark:text-white transition-custom">
                     <use href="#logo-tablet"></use>
                 </svg>
                 {/* Hamburger */}
                 <div
-                    className="relative w-12 h-12 bg-grey-1 dark:bg-grey-2 rounded-full laptop:cursor-pointer transition-dark"
+                    className="relative w-12 h-12 bg-grey-1 dark:bg-grey-2 rounded-full laptop:cursor-pointer transition-custom"
                     onClick={() => setIsShowMenu(!isShowMenu)}>
                     <span className={`hamburger-line${isShowMenu ? " hamburger-line--top" : ""}`}></span>
                     <span className={`hamburger-line ${isShowMenu ? " hamburger-line--bottom" : " mt-3"}`}></span>
                 </div>
                 {/* Logo Mobile */}
-                <svg className="inline-block tablet:hidden w-[100px] h-[43px] dark:text-white transition-dark">
+                <svg className="inline-block tablet:hidden w-[100px] h-[43px] dark:text-white transition-custom">
                     <use href="#logo-mobile"></use>
                 </svg>
                 {/* Logo Tablet */}
-                <svg className="hidden tablet:inline-block laptop:hidden w-[154px] h-[48px] ml-20 dark:text-white transition-dark">
+                <svg className="hidden tablet:inline-block laptop:hidden w-[154px] h-[48px] ml-20 dark:text-white transition-custom">
                     <use href="#logo-tablet"></use>
                 </svg>
                 {/* Right */}

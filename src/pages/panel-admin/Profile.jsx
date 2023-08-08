@@ -15,7 +15,7 @@ function Profile() {
                 <div className="hidden mt-14 w-full h-[188px] bg-green-10 rounded-2xl"></div>
             </div>
 
-            <div className="flex-1 px-10 border-l dark:border-grey-dark-100 transition-dark">
+            <div className="flex-1 px-10 border-l dark:border-grey-dark-100 transition-custom">
                 <h3 className="mb-10 text-2xl font-bold dark:text-white">Personal Informations</h3>
                 <div className="flex gap-8">
                     <div className="w-16 h-16 laptop:w-[105px] laptop:h-[105px] rounded-full overflow-hidden">

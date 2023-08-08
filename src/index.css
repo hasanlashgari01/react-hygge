@@ -9,7 +9,7 @@
     }
 
     body {
-        @apply dark:bg-grey-3 transition-dark duration-700;
+        @apply dark:bg-grey-3 transition-custom duration-700;
     }
 
     input,
@@ -19,7 +19,7 @@
 }
 
 @layer components {
-    .transition-dark {
+    .transition-custom {
         @apply transition-colors duration-300 ease-linear;
     }
 
@@ -150,7 +150,7 @@
     }
 
     .form-wrapper input:not([type="submit"]) {
-        @apply mt-2 mb-1 tablet:mt-3 tablet:mb-1.5 px-6 py-3 tablet:py-4 h-9 tablet:h-12 bg-transparent text-grey-dark-100 dark:text-grey-light-100 text-base font-semibold outline-grey-1 dark:outline-grey-2 focus:outline-green-100 dark:focus:outline-green-100 outline-none rounded-full transition-dark;
+        @apply mt-2 mb-1 tablet:mt-3 tablet:mb-1.5 px-6 py-3 tablet:py-4 h-9 tablet:h-12 bg-transparent text-grey-dark-100 dark:text-grey-light-100 text-base font-semibold outline-grey-1 dark:outline-grey-2 focus:outline-green-100 dark:focus:outline-green-100 outline-none rounded-full transition-custom;
     }
 
     .form-wrapper input[type="submit"] {
@@ -158,11 +158,30 @@
     }
 
     .p-admin__link {
-        @apply flex gap-2.5 py-3 px-4 text-green-100 rounded-2xl transition-colors duration-300;
+        @apply relative flex gap-2.5 py-4 px-6 text-black text-sm rounded-xl transition-custom;
+    }
+
+    .p-admin__link--active::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -12px;
+        width: 5px;
+        height: 100%;
+        background-color: #00cc96;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
     }
 
     .p-admin__link--active {
-        @apply bg-green-100 text-white;
+        @apply text-green-100 font-semibold;
+    }
+
+    .sidebar {
+        @apply bg-white dark:bg-black dark:text-white transition-custom;
     }
 }
 

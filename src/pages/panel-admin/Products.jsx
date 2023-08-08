@@ -102,7 +102,7 @@ function Products() {
     }, []);
 
     return (
-        <div className="space-container py-10">
+        <>
             <ToastContainer />
             <form
                 className="grid gap-5 grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 child:form-wrapper"
@@ -174,13 +174,19 @@ function Products() {
                     <input type="submit" name="off" value="Add Product" />
                 </div>
             </form>
-            <table className="w-full mt-10">
+            <div className="mt-10">
+                <div>
+                    <input type="text" />
+                </div>
+            </div>
+            <table className="w-full ">
                 <thead>
                     <tr className="bg-green-100/40">
                         {/* <th className="border py-2.5">Image</th> */}
-                        <th className="border py-2.5">Title</th>
-                        <th className="border py-2.5">Description</th>
-                        <th className="border py-2.5">Price Original</th>
+                        <th className="border py-2.5">Product</th>
+                        <th className="border py-2.5">Status</th>
+                        <th className="border py-2.5">Price</th>
+                        <th className="border py-2.5">Likes</th>
                     </tr>
                 </thead>
                 {products && (
@@ -209,7 +215,7 @@ function Products() {
                 )}
             </table>
             {!products && <ErrorMessage title="There is no product" />}
-        </div>
+        </>
     );
 }
 
