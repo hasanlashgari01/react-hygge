@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SubTitle from "./SubTitle";
 import Title from "./Title";
 
-function Reviews() {
+function Reviews({ image }) {
     const [reviews, setReviews] = useState([]);
     const desktopReviewsPrevRef = useRef(null);
     const desktopReviewsNextRef = useRef(null);
@@ -15,7 +15,7 @@ function Reviews() {
         fetch("http://localhost:4000/api/comments")
             .then(res => res.json())
             .then(result => {
-                setReviews(result);
+                setReviews(result.slice(0, 3));
             });
     }, []);
 
@@ -52,9 +52,12 @@ function Reviews() {
                         {reviews.map((review, index) => (
                             <SwiperSlide key={index}>
                                 <div className="flex flex-col justify-center laptop:justify-start text-center laptop:text-left">
-                                    {/* FIXME */}
-                                    <div className="w-20 h-20 mx-auto laptop:mx-0 mb-8 p-2 border-2 border-green-100 rounded-full"></div>
-                                    <h3 className="mb-4 dark:text-grey-light-100 text-2xl/[40px] font-semibold">Amy Smith</h3>
+                                    <div className="w-20 h-20 mx-auto laptop:mx-0 mb-8 p-2 border-2 border-green-100 rounded-full">
+                                        <img src={image} alt="" />
+                                    </div>
+                                    <h3 className="mb-4 dark:text-grey-light-100 text-2xl/[40px] font-semibold">
+                                        {review.author.fullName}
+                                    </h3>
                                     <p className="block dark:text-grey-light-100 mb-16 mobile:mb-20 mx-auto max-w-xs mobile:max-w-2xl text-xl/[32px] font-normal">
                                         {review.body}
                                     </p>
@@ -63,13 +66,17 @@ function Reviews() {
                         ))}
                     </Swiper>
 
-                    <div className="flex justify-center  laptop:justify-start gap-4 select-none">
-                        <span className="slider-click-wrapper border border-black dark:border-white/30" ref={desktopReviewsPrevRef}>
+                    <div className="flex justify-center laptop:justify-start gap-4 select-none">
+                        <span
+                            className="slider-click-wrapper border border-black dark:border-white/30"
+                            ref={desktopReviewsPrevRef}>
                             <svg className="w-4 h-4 text-black dark:text-white">
                                 <use href="#arrow-left"></use>
                             </svg>
                         </span>
-                        <span className="slider-click-wrapper border border-black dark:border-white/30" ref={desktopReviewsNextRef}>
+                        <span
+                            className="slider-click-wrapper border border-black dark:border-white/30"
+                            ref={desktopReviewsNextRef}>
                             <svg className="w-4 h-4 text-black dark:text-white">
                                 <use href="#arrow-right"></use>
                             </svg>
@@ -80,5 +87,9 @@ function Reviews() {
         </div>
     );
 }
+
+Reviews.defaultProps = {
+    image: "public/user.png",
+};
 
 export default Reviews;
