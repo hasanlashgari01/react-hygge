@@ -10,7 +10,9 @@ function Blogs() {
     useEffect(() => {
         fetch("http://localhost:4000/api/blogs")
             .then(res => res.json())
-            .then(data => setBlogs(data));
+            .then(data => {
+                setBlogs(data);
+            });
     }, []);
 
     return (
@@ -18,8 +20,8 @@ function Blogs() {
             <Header />
             <div className="space-container">
                 <div className="blog-post">
-                    {blogs.map(post => (
-                        <BlogMobile key={post._id} post={post} />
+                    {blogs.map(blog => (
+                        <BlogMobile key={blog._id} blog={blog} />
                     ))}
                 </div>
             </div>

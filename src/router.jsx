@@ -32,8 +32,8 @@ export const routes = [
     { path: "/faq", element: <Faq /> },
     { path: "/contact", element: <Contact /> },
     { path: "/cart", element: <Cart /> },
-    { path: "/blogs/:blogId", element: <Blog /> },
     { path: "/blogs", element: <Blogs /> },
+    { path: "/blogs/:blogId", element: <Blog /> },
     {
         path: "/register",
         element: (

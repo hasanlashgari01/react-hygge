@@ -1,7 +1,7 @@
 import propTypes from "prop-types";
 import SmoothScrollLink from "../SmoothScrollLink";
 
-function BlogMobile({ post }) {
+function BlogMobile({ blog }) {
     return (
         <div className="relative mx-auto max-w-[311px] mt-14">
             {/* Badge */}
@@ -19,11 +19,11 @@ function BlogMobile({ post }) {
             {/* Content */}
             <div className="mt-8">
                 <SmoothScrollLink
-                    to={`http://localhost:5173/blogs/${post._id}`}
+                    to={`http://localhost:5173/blogs/${blog._id}`}
                     className="product__title">
-                    {post.title}
+                    {blog.title}
                 </SmoothScrollLink>
-                <span className="product__tip mt-4">{post.tip}</span>
+                <span className="product__tip mt-4">{blog.tip}</span>
             </div>
         </div>
     );

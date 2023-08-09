@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Keyboard } from "swiper/modules";
 import BlogMobile from "./BlogMobile";
@@ -7,10 +7,17 @@ import SubTitle from "./SubTitle";
 import Title from "./Title";
 
 function Blog() {
-    const [blogPost, setBlogPost] = useState([1, 2, 3, 4, 5, 6, 7]);
-    const [blogPosts, setBlogPosts] = useState([1, 2, 3, 4, 5, 6, 7]);
+    const [blogs, setBlogs] = useState([]);
     const desktopBlogPostPrevRef = useRef(null);
     const desktopBlogPostNextRef = useRef(null);
+
+    useEffect(() => {
+        fetch("http://localhost:4000/api/blogs")
+            .then(res => res.json())
+            .then(data => {
+                setBlogs(data);
+            });
+    }, []);
 
     return (
         <div className="space-container">
@@ -41,19 +48,23 @@ function Blog() {
                         swiper.params.navigation.nextEl = desktopBlogPostNextRef.current;
                     }}
                     className="mySwiper tablet:hidden">
-                    {blogPost.map((post, index) => (
-                        <SwiperSlide key={index}>
-                            <BlogMobile key={index} post={post} />
+                    {blogs.map(blog => (
+                        <SwiperSlide key={blog._id}>
+                            <BlogMobile blog={blog} />
                         </SwiperSlide>
                     ))}
 
                     <div className="flex justify-center laptop:justify-start mt-10 gap-4 select-none">
-                        <span className="slider-click-wrapper border border-black dark:border-white/30" ref={desktopBlogPostPrevRef}>
+                        <span
+                            className="slider-click-wrapper border border-black dark:border-white/30"
+                            ref={desktopBlogPostPrevRef}>
                             <svg className="w-4 h-4 text-black dark:text-white">
                                 <use href="#arrow-left"></use>
                             </svg>
                         </span>
-                        <span className="slider-click-wrapper border border-black dark:border-white/30" ref={desktopBlogPostNextRef}>
+                        <span
+                            className="slider-click-wrapper border border-black dark:border-white/30"
+                            ref={desktopBlogPostNextRef}>
                             <svg className="w-4 h-4 text-black dark:text-white">
                                 <use href="#arrow-right"></use>
                             </svg>
@@ -62,8 +73,8 @@ function Blog() {
                 </Swiper>
 
                 <div className="blog-post">
-                    {blogPosts.map((post, index) => (
-                        <BlogTablet key={index} post={post} />
+                    {blogs.map(blog => (
+                        <BlogTablet key={blog._id} blog={blog} />
                     ))}
                 </div>
             </div>
