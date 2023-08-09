@@ -2,7 +2,7 @@ import propTypes from "prop-types";
 
 function Choose({ icon, title, description }) {
     return (
-        <div className="flex flex-1 flex-col justify-center items-center tablet:min-w-[350px]">
+        <div className="flex flex-1 flex-col items-center tablet:min-w-[350px]">
             <div className="flex justify-center items-center mb-8 w-16 h-16 bg-grey-1 dark:bg-grey-2 rounded-full">
                 <svg className="w-8 h-8 text-black dark:text-white">
                     <use href={`#${icon}`}></use>
