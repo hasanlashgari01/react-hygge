@@ -3,10 +3,9 @@ import { Keyboard, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SubTitle from "./SubTitle";
 import Title from "./Title";
-
+import SmoothScrollLink from "../SmoothScrollLink";
 import "swiper/css";
 import "swiper/css/pagination";
-import SmoothScrollLink from "../SmoothScrollLink";
 
 function Categories() {
     const [categories, setCategories] = useState([]);
@@ -87,12 +86,14 @@ function Categories() {
                         {categories.map(category => (
                             <SwiperSlide key={category._id}>
                                 <SmoothScrollLink
-                                    to={`http://localhost:5173/category/${category.name}`}
+                                    to={`http://localhost:5173/category/${category.shortName}`}
                                     className="group inline-flex flex-col justify-center items-center w-32 h-32 bg-grey-1 dark:bg-grey-2 hover:bg-green-100/70 dark:hover:bg-green-100/70 rounded-3xl transition-custom">
                                     <svg className="w-8 h-8 text-green-100 group-hover:text-white transition-colors">
                                         <use href={`#${category.icon}`}></use>
                                     </svg>
-                                    <h3 className="mt-4 text-grey-dark-100 dark:text-grey-light-100 font-semibold select-none">{category.title}</h3>
+                                    <h3 className="mt-4 text-grey-dark-100 dark:text-grey-light-100 font-semibold select-none">
+                                        {category.title}
+                                    </h3>
                                 </SmoothScrollLink>
                             </SwiperSlide>
                         ))}

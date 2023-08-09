@@ -26,7 +26,7 @@ import Blog from "./pages/main/Blog";
 
 export const routes = [
     { path: "/", element: <Index /> },
-    { path: "/category/:categoryId", element: <CategoryProducts /> },
+    { path: "/category/:shortName", element: <CategoryProducts /> },
     { path: "/product/:productId", element: <ProductPage /> },
     { path: "/about", element: <About /> },
     { path: "/faq", element: <Faq /> },
