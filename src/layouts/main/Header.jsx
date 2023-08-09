@@ -67,8 +67,8 @@ function Header() {
                     <SmoothScrollNavLink to="/category-products" className={navLinkStyle}>
                         Categories
                     </SmoothScrollNavLink>
-                    <SmoothScrollNavLink to="/blog" className={navLinkStyle}>
-                        Blog
+                    <SmoothScrollNavLink to="/blogs" className={navLinkStyle}>
+                        Blogs
                     </SmoothScrollNavLink>
                     <SmoothScrollNavLink to="/about" className={navLinkStyle}>
                         About

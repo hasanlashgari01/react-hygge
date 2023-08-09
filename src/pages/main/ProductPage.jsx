@@ -31,7 +31,6 @@ function ProductPage() {
     const desktopProductNextRef = useRef(null);
 
     useEffect(() => {
-        console.log(productId);
         fetch(`http://localhost:4000/api/products/${productId}`)
             .then(res => res.json())
             .then(result => {

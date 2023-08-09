@@ -10,6 +10,7 @@ import Login from "./pages/main/Login";
 import ProductPage from "./pages/main/ProductPage";
 import Register from "./pages/main/Register";
 import Search from "./pages/main/Search";
+import Blogs from "./pages/main/Blogs";
 // Admin Dashboard
 import AdminPanel from "./pages/panel-admin/AdminPanel";
 import PAdminAdmins from "./pages/panel-admin/Admins";
@@ -21,6 +22,7 @@ import PAdminUsers from "./pages/panel-admin/Users";
 // Privates
 import LoginPrivate from "./components/main/Private/LoginPrivate";
 import PAdminPrivate from "./components/panel-admin/Private/PAdminPrivate";
+import Blog from "./pages/main/Blog";
 
 export const routes = [
     { path: "/", element: <Index /> },
@@ -30,6 +32,8 @@ export const routes = [
     { path: "/faq", element: <Faq /> },
     { path: "/contact", element: <Contact /> },
     { path: "/cart", element: <Cart /> },
+    { path: "/blogs/:blogId", element: <Blog /> },
+    { path: "/blogs", element: <Blogs /> },
     {
         path: "/register",
         element: (

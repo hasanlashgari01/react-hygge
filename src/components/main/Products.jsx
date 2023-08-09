@@ -11,7 +11,10 @@ function Products() {
     useEffect(() => {
         fetch("http://localhost:4000/api/products")
             .then(res => res.json())
-            .then(result => result.products && setProducts(result.products.slice(0, 8)));
+            .then(result => {
+                console.log(result);
+                result && setProducts(result.slice(0, 8));
+            });
     }, []);
 
     return (
