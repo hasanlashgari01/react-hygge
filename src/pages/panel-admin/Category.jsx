@@ -5,11 +5,24 @@ import { ToastContainer } from "react-toastify";
 
 function Category() {
     const [categories, setCategories] = useState([]);
+    const [isChecked, setIsChecked] = useState(false);
+    const [categoriesId, setCategoriesId] = useState([]);
+
     const token = useToken();
     const [setIsModal] = SwalModal();
 
     useEffect(() => {
         getAllCategories();
+
+        window.addEventListener("keyup", e => {
+            e.preventDefault();
+
+            if (window.location.href === "http://localhost:5173/p-admin/category") {
+                if (e.ctrlKey && e.code === "KeyA") {
+                    clearAll();
+                }
+            }
+        });
     }, []);
 
     const getAllCategories = () => {
@@ -41,14 +54,56 @@ function Category() {
         }
     };
 
+    const changeHandler = () => {
+        setIsChecked(!isChecked);
+        const select = document.querySelectorAll("tbody input");
+
+        select.forEach(s => {
+            if (!isChecked) {
+                s.checked = true;
+            } else {
+                s.checked = false;
+            }
+        });
+    };
+
+    const deleteMany = () => {
+        fetch("http://localhost:4000/api/categories/deleteMany", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ id: categoriesId }),
+        })
+            .then(res => res.json())
+            .then(() => {
+                console.log("ok");
+                getAllCategories();
+            });
+    };
+
+    const removeCategory = categoryId => {
+        setCategoriesId(prev => [...prev, categoryId]);
+    };
+
     return (
-        <>
+        <div>
             <ToastContainer />
+            <button
+                onClick={() =>
+                    setIsModal({
+                        status: "pending",
+                        cb: deleteMany,
+                    })
+                }>
+                Delete Many
+            </button>
             <table className="w-full table-auto">
                 <thead>
                     <tr className="bg-green-10 rounded-xl overflow-hidden">
                         <th className="text-left border px-4 py-2 w-2">
-                            <input type="checkbox" />
+                            <input type="checkbox" className="w-4 h-4" onClick={changeHandler} />
                         </th>
                         <th className="text-left border px-4 py-2">Icon</th>
                         <th className="text-left border px-4 py-2">Title</th>
@@ -61,7 +116,12 @@ function Category() {
                         {categories.map(category => (
                             <tr key={category._id}>
                                 <td className="px-4 py-2">
-                                    <input value={category._id} type="checkbox" />
+                                    <input
+                                        type="checkbox"
+                                        className="w-4 h-4"
+                                        value={category._id}
+                                        onChange={() => removeCategory(category._id)}
+                                    />
                                 </td>
                                 <td className="px-4 py-2">{category.icon}</td>
                                 <td className="px-4 py-2">{category.title}</td>
@@ -91,7 +151,7 @@ function Category() {
                     </tbody>
                 )}
             </table>
-        </>
+        </div>
     );
 }
 
