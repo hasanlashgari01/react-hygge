@@ -32,7 +32,7 @@
     }
 
     .product__title {
-        @apply text-grey-dark-100 dark:text-grey-light-100 h-20 tablet:h-[104px] text-lg mobile:text-2xl/[40px] tablet:text-[32px]/[48px] font-semibold line-clamp-2;
+        @apply text-grey-dark-100 dark:text-grey-light-100 tablet:h-[52px] text-lg mobile:text-xl/[40px] tablet:text-2xl/[48px] font-semibold line-clamp-1;
     }
 
     .product__tip {

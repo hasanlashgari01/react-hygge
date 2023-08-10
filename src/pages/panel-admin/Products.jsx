@@ -9,7 +9,10 @@ import useToken from "../../hooks/useToken";
 
 function Products() {
     const navigate = useNavigate();
+
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+
     const [setIsModal] = SwalModal();
     const token = useToken();
     const form = useFormik({
@@ -19,7 +22,7 @@ function Products() {
             description: "",
             priceOriginal: "",
             ability: "",
-            categoryID: "64cd19ff11ae1a7a9712fe61",
+            category: "",
         },
         validate: values => {
             const errors = {};
@@ -62,7 +65,22 @@ function Products() {
         }
     };
 
+    const getAllCategories = () => {
+        if (token) {
+            fetch("http://localhost:4000/api/categories", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then(res => res.json())
+                .then(result => {
+                    setCategories(result);
+                });
+        }
+    };
+
     const handleSubmit = values => {
+        console.log(values);
         fetch("http://localhost:4000/api/products", {
             method: "POST",
             headers: {
@@ -75,7 +93,6 @@ function Products() {
             .then(() => {
                 getAllProducts();
                 toastCustom("success", "Product Created");
-                // navigate("/");
             })
             .catch(() => {
                 toastCustom("error", "Email or password is wrong");
@@ -98,6 +115,7 @@ function Products() {
     };
 
     useEffect(() => {
+        getAllCategories();
         getAllProducts();
     }, []);
 
@@ -158,20 +176,23 @@ function Products() {
                     )}
                 </div>
                 <div>
-                    <input
-                        type="text"
-                        name="categoryID"
-                        placeholder="Product categoryID"
-                        value={form.values.categoryID}
+                    <select
+                        id="category"
+                        name="category"
                         onChange={form.handleChange}
-                        onBlur={form.handleBlur}
-                    />
-                    {form.errors.categoryID && form.touched.categoryID && (
-                        <span>{form.errors.categoryID}</span>
-                    )}
+                        onBlur={form.handleBlur}>
+                        <option value="Select category" selected disabled>
+                            Select none
+                        </option>
+                        {categories.map(category => (
+                            <option key={category._id} value={category._id}>
+                                {category.title}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div>
-                    <input type="submit" name="off" value="Add Product" />
+                    <input type="submit" value="Add Product" />
                 </div>
             </form>
             <div className="mt-10">

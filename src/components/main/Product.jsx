@@ -30,6 +30,9 @@ function Product({ product }) {
                     original={product.priceOriginal}
                     discount={product.priceDiscount}
                 />
+                <div>
+                    <button className="p-3 dark:text-white">Add to cart</button>
+                </div>
             </div>
         </div>
     );

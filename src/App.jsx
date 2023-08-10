@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
-import AuthContext from "./context/authContext";
-// import CartContext from "./context/cartContext";
 import { routes } from "./router";
+import AuthContext from "./context/authContext";
+import CartContext from "./context/cartContext";
 
 function App() {
     const router = useRoutes(routes);
@@ -10,7 +10,7 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(null);
     const [token, setToken] = useState(null);
     const [userInfos, setUserInfos] = useState(null);
-    // const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(0);
 
     useEffect(() => {
         const localStorageData = localStorage.getItem("user");
@@ -42,7 +42,7 @@ function App() {
         setUserInfos({});
         localStorage.removeItem("user");
     };
-    /*
+
     const addProductToCart = (product, quantity) => {
         let productDetail = { product, quantity };
         localStorage.setItem("cart", JSON.stringify(productDetail));
@@ -51,12 +51,11 @@ function App() {
     const removeAllProductsFromCart = () => {};
     const increaseProduct = () => {};
     const decreaseProduct = () => {};
-    */
 
     return (
         <div className="bg-white dark:bg-grey-3 transition-custom">
             <AuthContext.Provider value={{ isLoggedIn, token, userInfos, login, logout }}>
-                {/* <CartContext.Provider
+                <CartContext.Provider
                     value={{
                         cart,
                         addProductToCart,
@@ -64,9 +63,9 @@ function App() {
                         removeAllProductsFromCart,
                         increaseProduct,
                         decreaseProduct,
-                    }}> */}
-                {router}
-                {/* </CartContext.Provider> */}
+                    }}>
+                    {router}
+                </CartContext.Provider>
             </AuthContext.Provider>
         </div>
     );

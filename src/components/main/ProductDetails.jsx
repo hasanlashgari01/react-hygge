@@ -2,7 +2,7 @@ import propTypes from "prop-types";
 
 function ProductDetails({ ability, offPercent, original, discount }) {
     return (
-        <div className="flex items-center gap-x-6 mt-4">
+        <div className="flex items-center gap-x-6">
             <span className={`product__tip`}>{ability}</span>
             <div className="flex items-center">
                 {offPercent && (

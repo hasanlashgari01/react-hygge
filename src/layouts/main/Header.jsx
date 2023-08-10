@@ -1,13 +1,17 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import SmoothScrollNavLink from "../../components/SmoothScrollNavLink";
+import CartContext from "../../context/cartContext";
 
 function Header() {
-    const [isShowMenu, setIsShowMenu] = useState(false);
-    const [cart, setCart] = useState(false);
+    const { cart } = useContext(CartContext);
 
-    const navLinkStyle = ({ isActive }) => (isActive ? "navigation-link navigation-link--active" : "navigation-link");
+    const [isShowMenu, setIsShowMenu] = useState(false);
+    // const [cart, setCart] = useState(false);
+
+    const navLinkStyle = ({ isActive }) =>
+        isActive ? "navigation-link navigation-link--active" : "navigation-link";
 
     return (
         <>
@@ -20,8 +24,14 @@ function Header() {
                 <div
                     className="relative w-12 h-12 bg-grey-1 dark:bg-grey-2 rounded-full laptop:cursor-pointer transition-custom"
                     onClick={() => setIsShowMenu(!isShowMenu)}>
-                    <span className={`hamburger-line${isShowMenu ? " hamburger-line--top" : ""}`}></span>
-                    <span className={`hamburger-line ${isShowMenu ? " hamburger-line--bottom" : " mt-3"}`}></span>
+                    <span
+                        className={`hamburger-line${
+                            isShowMenu ? " hamburger-line--top" : ""
+                        }`}></span>
+                    <span
+                        className={`hamburger-line ${
+                            isShowMenu ? " hamburger-line--bottom" : " mt-3"
+                        }`}></span>
                 </div>
                 {/* Logo Mobile */}
                 <svg className="inline-block tablet:hidden w-[100px] h-[43px] dark:text-white transition-custom">
@@ -37,11 +47,15 @@ function Header() {
                         <use href="#search"></use>
                     </svg>
                     <div className="relative group">
-                        <SmoothScrollLink to="/cart" className="relative flex justify-center items-center w-12 h-12 laptop:cursor-pointer">
+                        <SmoothScrollLink
+                            to="/cart"
+                            className="relative flex justify-center items-center w-12 h-12 laptop:cursor-pointer">
                             <svg className="w-6 h-6 dark:text-white">
                                 <use href="#cart"></use>
                             </svg>
-                            <span className="absolute top-0 right-0 inline-flex justify-center items-center w-4 h-4 p-2.5 bg-pink-100 rounded-full">0</span>
+                            <span className="absolute top-0 right-0 inline-flex justify-center items-center w-4 h-4 p-2.5 bg-pink-100 rounded-full">
+                                {cart}
+                            </span>
                         </SmoothScrollLink>
                     </div>
                     <SmoothScrollLink to="/register">
@@ -57,7 +71,11 @@ function Header() {
                     <svg className="w-6 h-6 dark:text-white">
                         <use href="#search"></use>
                     </svg>
-                    <input type="text" placeholder="Search" className="ml-4 bg-transparent dark:text-white outline-none" />
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="ml-4 bg-transparent dark:text-white outline-none"
+                    />
                 </div>
                 {/* Nav */}
                 <nav className="flex flex-col gap-6 mb-14 mobile:mt-14">
