@@ -103,7 +103,11 @@ function Category() {
                 <thead>
                     <tr className="bg-green-10 rounded-xl overflow-hidden">
                         <th className="text-left border px-4 py-2 w-2">
-                            <input type="checkbox" className="w-4 h-4" onClick={changeHandler} />
+                            <input
+                                type="checkbox"
+                                className="checkbox-custom"
+                                onClick={changeHandler}
+                            />
                         </th>
                         <th className="text-left border px-4 py-2">Icon</th>
                         <th className="text-left border px-4 py-2">Title</th>
@@ -118,7 +122,7 @@ function Category() {
                                 <td className="px-4 py-2">
                                     <input
                                         type="checkbox"
-                                        className="w-4 h-4"
+                                        className="checkbox-custom"
                                         value={category._id}
                                         onChange={() => removeCategory(category._id)}
                                     />

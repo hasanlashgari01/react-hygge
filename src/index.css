@@ -183,6 +183,10 @@
     .sidebar {
         @apply bg-white dark:bg-black dark:text-white transition-custom;
     }
+
+    .checkbox-custom {
+        @apply w-4 h-4 outline-0 appearance-none border border-blue-500 checked:bg-blue-500 checked:rounded-[4px] transition-all transition-custom;
+    }
 }
 
 @media screen and (min-width: 1024px) {
