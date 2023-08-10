@@ -68,19 +68,21 @@ function Category() {
     };
 
     const deleteMany = () => {
-        fetch("http://localhost:4000/api/categories/deleteMany", {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ id: categoriesId }),
-        })
-            .then(res => res.json())
-            .then(() => {
-                console.log("ok");
-                getAllCategories();
-            });
+        if (categoriesId.length !== 0) {
+            fetch("http://localhost:4000/api/categories/deleteMany", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ id: categoriesId }),
+            })
+                .then(res => res.json())
+                .then(() => {
+                    console.log("ok");
+                    getAllCategories();
+                });
+        }
     };
 
     const removeCategory = categoryId => {
@@ -88,74 +90,78 @@ function Category() {
     };
 
     return (
-        <div>
+        <>
             <ToastContainer />
-            <button
-                onClick={() =>
-                    setIsModal({
-                        status: "pending",
-                        cb: deleteMany,
-                    })
-                }>
-                Delete Many
-            </button>
-            <table className="w-full table-auto">
-                <thead>
-                    <tr className="bg-green-10 rounded-xl overflow-hidden">
-                        <th className="text-left border px-4 py-2 w-2">
-                            <input
-                                type="checkbox"
-                                className="checkbox-custom"
-                                onClick={changeHandler}
-                            />
-                        </th>
-                        <th className="text-left border px-4 py-2">Icon</th>
-                        <th className="text-left border px-4 py-2">Title</th>
-                        <th className="text-left border px-4 py-2">Name</th>
-                        <th className="text-right border px-4 py-2 w-32">Actions</th>
-                    </tr>
-                </thead>
-                {categories && (
-                    <tbody>
-                        {categories.map(category => (
-                            <tr key={category._id}>
-                                <td className="px-4 py-2">
-                                    <input
-                                        type="checkbox"
-                                        className="checkbox-custom"
-                                        value={category._id}
-                                        onChange={() => removeCategory(category._id)}
-                                    />
-                                </td>
-                                <td className="px-4 py-2">{category.icon}</td>
-                                <td className="px-4 py-2">{category.title}</td>
-                                <td className="px-4 py-2">{category.shortName}</td>
-                                <td className="flex justify-end gap-x-5 px-4 py-2">
-                                    <span className="p-1 bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">
-                                        <svg className="w-6 h-6">
-                                            <use href="#pencil-square"></use>
-                                        </svg>
-                                    </span>
-                                    <span
-                                        className="p-1 bg-red/10 text-red rounded-md laptop:cursor-pointer"
-                                        onClick={() =>
-                                            setIsModal({
-                                                status: "pending",
-                                                id: category._id,
-                                                cb: deleteCategory,
-                                            })
-                                        }>
-                                        <svg className="w-6 h-6">
-                                            <use href="#trash"></use>
-                                        </svg>
-                                    </span>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                )}
-            </table>
-        </div>
+            <div className="flex flex-col">
+                <button
+                    className="self-end mb-4 py-2 px-4 bg-red/10 text-red rounded-lg disabled:bg-red/5 disabled:cursor-not-allowed"
+                    onClick={() =>
+                        categoriesId.length &&
+                        setIsModal({
+                            status: "pending",
+                            cb: deleteMany,
+                        })
+                    }>
+                    Delete Many
+                </button>
+                <table className="w-full table-auto">
+                    <thead>
+                        <tr className="bg-green-10 rounded-xl overflow-hidden">
+                            <th className="text-left border px-4 py-2 w-2">
+                                <input
+                                    type="checkbox"
+                                    className="checkbox-custom"
+                                    onClick={changeHandler}
+                                />
+                            </th>
+                            <th className="text-left border px-4 py-2">Icon</th>
+                            <th className="text-left border px-4 py-2">Title</th>
+                            <th className="text-left border px-4 py-2">Name</th>
+                            <th className="text-right border px-4 py-2 w-32">Actions</th>
+                        </tr>
+                    </thead>
+                    {categories && (
+                        <tbody>
+                            {categories.map(category => (
+                                <tr key={category._id}>
+                                    <td className="px-4 py-2">
+                                        <input
+                                            type="checkbox"
+                                            className="checkbox-custom"
+                                            value={category._id}
+                                            onChange={() => removeCategory(category._id)}
+                                        />
+                                    </td>
+                                    <td className="px-4 py-2">{category.icon}</td>
+                                    <td className="px-4 py-2">{category.title}</td>
+                                    <td className="px-4 py-2">{category.shortName}</td>
+                                    <td className="flex justify-end gap-x-5 px-4 py-2">
+                                        <span className="p-1 bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">
+                                            <svg className="w-6 h-6">
+                                                <use href="#pencil-square"></use>
+                                            </svg>
+                                        </span>
+                                        <span
+                                            className="p-1 bg-red/10 text-red rounded-md laptop:cursor-pointer"
+                                            onClick={() =>
+                                                setIsModal({
+                                                    status: "pending",
+                                                    id: category._id,
+                                                    cb: deleteCategory,
+                                                })
+                                            }>
+                                            <svg className="w-6 h-6">
+                                                <use href="#trash"></use>
+                                            </svg>
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    )}
+                </table>
+            </div>
+        </>
     );
 }
 
