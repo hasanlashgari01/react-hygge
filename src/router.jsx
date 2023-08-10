@@ -17,6 +17,7 @@ import PAdminAdmins from "./pages/panel-admin/Admins";
 import PAdminIndex from "./pages/panel-admin/Index";
 import PAdminOff from "./pages/panel-admin/Off";
 import PAdminProducts from "./pages/panel-admin/Products";
+import PAdminCategories from "./pages/panel-admin/Category";
 import Profile from "./pages/panel-admin/Profile";
 import PAdminUsers from "./pages/panel-admin/Users";
 // Privates
@@ -65,6 +66,7 @@ export const routes = [
             { path: "users", element: <PAdminUsers /> },
             { path: "admins", element: <PAdminAdmins /> },
             { path: "products", element: <PAdminProducts /> },
+            { path: "category", element: <PAdminCategories /> },
             { path: "off", element: <PAdminOff /> },
             { path: "profile", element: <Profile /> },
         ],

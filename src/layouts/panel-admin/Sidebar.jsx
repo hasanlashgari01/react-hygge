@@ -23,6 +23,9 @@ function Sidebar() {
                     <NavLink to="products" className={navLinkStyle}>
                         Products
                     </NavLink>
+                    <NavLink to="category" className={navLinkStyle}>
+                        Categories
+                    </NavLink>
                     <NavLink to="off" className={navLinkStyle}>
                         Off
                     </NavLink>
