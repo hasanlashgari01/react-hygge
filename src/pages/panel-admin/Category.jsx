@@ -44,23 +44,36 @@ function Category() {
     return (
         <>
             <ToastContainer />
-            <table className="w-full ">
+            <table className="w-full table-auto">
                 <thead>
-                    <tr className="bg-green-100/40">
-                        <th className="border py-2.5">Icon</th>
-                        <th className="border py-2.5">Title</th>
-                        <th className="border py-2.5">name</th>
+                    <tr className="bg-green-10 rounded-xl overflow-hidden">
+                        <th className="text-left border px-4 py-2 w-2">
+                            <input type="checkbox" />
+                        </th>
+                        <th className="text-left border px-4 py-2">Icon</th>
+                        <th className="text-left border px-4 py-2">Title</th>
+                        <th className="text-left border px-4 py-2">Name</th>
+                        <th className="text-right border px-4 py-2 w-32">Actions</th>
                     </tr>
                 </thead>
                 {categories && (
                     <tbody>
                         {categories.map(category => (
                             <tr key={category._id}>
-                                <td>{category.icon}</td>
-                                <td>{category.title}</td>
-                                <td>{category.shortName}</td>
-                                <td className="flex gap-x-5">
-                                    <button
+                                <td className="px-4 py-2">
+                                    <input value={category._id} type="checkbox" />
+                                </td>
+                                <td className="px-4 py-2">{category.icon}</td>
+                                <td className="px-4 py-2">{category.title}</td>
+                                <td className="px-4 py-2">{category.shortName}</td>
+                                <td className="flex justify-end gap-x-5 px-4 py-2">
+                                    <span className="p-1 bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">
+                                        <svg className="w-6 h-6">
+                                            <use href="#pencil-square"></use>
+                                        </svg>
+                                    </span>
+                                    <span
+                                        className="p-1 bg-red/10 text-red rounded-md laptop:cursor-pointer"
                                         onClick={() =>
                                             setIsModal({
                                                 status: "pending",
@@ -68,8 +81,10 @@ function Category() {
                                                 cb: deleteCategory,
                                             })
                                         }>
-                                        Delete
-                                    </button>
+                                        <svg className="w-6 h-6">
+                                            <use href="#trash"></use>
+                                        </svg>
+                                    </span>
                                 </td>
                             </tr>
                         ))}
