@@ -18,7 +18,6 @@ function Index() {
         })
             .then(res => res.json())
             .then(result => {
-                console.log(result);
                 setInfos(result);
                 setUsersCount(result.usersCount);
                 setUsers(result.users.slice(0, 10));
