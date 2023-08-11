@@ -52,7 +52,7 @@ function Admins() {
     };
 
     return (
-        <div className=" h-20">
+        <>
             <ToastContainer />
             <table className="table">
                 <thead>
@@ -61,6 +61,7 @@ function Admins() {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Date of Register</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 {admins && (
@@ -86,7 +87,7 @@ function Admins() {
                 )}
             </table>
             {!admins && <ErrorMessage title="There is no admin" />}
-        </div>
+        </>
     );
 }
 

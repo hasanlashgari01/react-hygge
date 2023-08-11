@@ -4,11 +4,11 @@ import Topbar from "../../layouts/panel-admin/Topbar";
 
 function AdminPanel() {
     return (
-        <div>
-            <Topbar />
-            <div className="flex transition-custom">
-                <Sidebar />
-                <div className="flex-1 bg-grey-light-100 dark:bg-grey-3 p-[30px] transition-custom">
+        <div className="flex">
+            <Sidebar />
+            <div className="flex-1 bg-grey-light-100 dark:bg-grey-3 transition-custom" >
+                <Topbar />
+                <div className="p-[30px]">
                     <Outlet />
                 </div>
             </div>
