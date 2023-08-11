@@ -26,28 +26,32 @@ function Index() {
 
     return (
         <>
-            <div className="grid grid-cols-3 gap-[30px]">
+            <div className="grid grid-cols-1 mobile:grid-cols-2 tablet:grid-cols-3 gap-[30px]">
                 <InfoBadge title="Users" count={usersCount} />
                 <InfoBadge title="Products" count={productsCount} />
                 <InfoBadge title="Comments" count={commentsCount} />
             </div>
-            <table className="w-full mt-10">
+            <table className="mt-10 table-auto w-full border-collapse border border-slate-300">
                 <thead>
-                    <tr className="bg-green-100/40">
-                        <th className="border py-2.5">Full Name</th>
-                        <th className="border py-2.5">Email</th>
-                        <th className="border py-2.5">Role</th>
-                        <th className="border py-2.5">Date of Register</th>
+                    <tr className="bg-green-10">
+                        <th className="text-left p-2">Full Name</th>
+                        <th className="text-left p-2">Email</th>
+                        <th className="hidden tablet:inline-block w-40 text-left p-2">Role</th>
+                        <th className="hidden laptop:inline-block text-left p-2">
+                            Date of Register
+                        </th>
                     </tr>
                 </thead>
                 {users && (
-                    <tbody>
+                    <tbody className="child">
                         {users.map(user => (
-                            <tr key={user._id} className="">
-                                <td>{user.fullName}</td>
-                                <td>{user.email}</td>
-                                <td>{user.role}</td>
-                                <td>{user.createdAt.slice(0, 10)}</td>
+                            <tr key={user._id} className="border-b border-gray-300 last:border-0 hover:bg-slate-100 transition-custom">
+                                <td className="p-2">{user.fullName}</td>
+                                <td className="p-2">{user.email}</td>
+                                <td className="hidden tablet:inline-block w-40 p-2">{user.role}</td>
+                                <td className="hidden laptop:inline-block p-2">
+                                    {user.createdAt.slice(0, 10)}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
