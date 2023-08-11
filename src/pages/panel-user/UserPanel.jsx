@@ -4,10 +4,10 @@ import Sidebar from "../../layouts/panel-user/Sidebar";
 
 function UserPanel() {
     return (
-        <div className="space-container">
+        <div>
             <Header />
-            <div className="flex gap-x-[18px] mt-10">
-                <Sidebar />
+            <div className="space-container flex gap-x-[18px] mt-10">
+                <Sidebar status="hidden" />
                 <div className="flex-1">
                     <Outlet />
                 </div>

@@ -1,41 +1,42 @@
-import SmoothScrollNavLink from "../../components/SmoothScrollNavLink";
+import { NavLink } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ status, setClose }) {
     const linkStyle = ({ isActive }) =>
         isActive ? "p-user__link p-user__link--active" : "p-user__link";
 
     return (
-        <div className="hidden laptop:flex flex-col gap-y-4 h-fit py-6 px-[28px] border border-[#cbcbcb] rounded-lg">
-            <SmoothScrollNavLink className={linkStyle} to="/">
+        <div
+            className={`${status} laptop: flex flex-col gap-y-4 h-fit py-6 px-[28px] border border - [#cbcbcb] rounded - lg`}>
+            <NavLink to="/" className={linkStyle} onClick={setClose}>
                 <svg className="w-6 h-6">
                     <use href="#home"></use>
                 </svg>
                 Home
-            </SmoothScrollNavLink>
-            <SmoothScrollNavLink className={linkStyle} to="cart">
+            </NavLink>
+            <NavLink to="cart" className={linkStyle} onClick={setClose}>
                 <svg className="w-6 h-6">
                     <use href="#cart"></use>
                 </svg>
                 Cart
-            </SmoothScrollNavLink>
-            <SmoothScrollNavLink className={linkStyle} to="likes">
+            </NavLink>
+            <NavLink to="likes" className={linkStyle} onClick={setClose}>
                 <svg className="w-6 h-6">
                     <use href="#heart"></use>
                 </svg>
                 Likes
-            </SmoothScrollNavLink>
-            <SmoothScrollNavLink className={linkStyle} to="bookmarks">
+            </NavLink>
+            <NavLink to="bookmarks" className={linkStyle} onClick={setClose}>
                 <svg className="w-6 h-6">
                     <use href="#bookmark"></use>
                 </svg>
                 Bookmarks
-            </SmoothScrollNavLink>
-            <SmoothScrollNavLink className={linkStyle} to="profile">
+            </NavLink>
+            <NavLink to="profile" className={linkStyle} onClick={setClose}>
                 <svg className="w-6 h-6">
                     <use href="#user"></use>
                 </svg>
                 Profile
-            </SmoothScrollNavLink>
+            </NavLink>
         </div>
     );
 }
