@@ -31,25 +31,23 @@ function Index() {
                 <InfoBadge title="Products" count={productsCount} />
                 <InfoBadge title="Comments" count={commentsCount} />
             </div>
-            <table className="mt-10 table-auto w-full border-collapse border border-slate-300">
+            <table className="table">
                 <thead>
-                    <tr className="bg-green-10">
-                        <th className="text-left p-2">Full Name</th>
-                        <th className="text-left p-2">Email</th>
-                        <th className="hidden tablet:inline-block w-40 text-left p-2">Role</th>
-                        <th className="hidden laptop:inline-block text-left p-2">
-                            Date of Register
-                        </th>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th className="hidden tablet:inline-block w-40">Role</th>
+                        <th className="hidden laptop:inline-block">Date of Register</th>
                     </tr>
                 </thead>
                 {users && (
                     <tbody className="child">
                         {users.map(user => (
-                            <tr key={user._id} className="border-b border-gray-300 last:border-0 hover:bg-slate-100 transition-custom">
-                                <td className="p-2">{user.fullName}</td>
-                                <td className="p-2">{user.email}</td>
-                                <td className="hidden tablet:inline-block w-40 p-2">{user.role}</td>
-                                <td className="hidden laptop:inline-block p-2">
+                            <tr key={user._id}>
+                                <td>{user.fullName}</td>
+                                <td>{user.email}</td>
+                                <td className="hidden tablet:inline-block w-40">{user.role}</td>
+                                <td className="hidden laptop:inline-block">
                                     {user.createdAt.slice(0, 10)}
                                 </td>
                             </tr>

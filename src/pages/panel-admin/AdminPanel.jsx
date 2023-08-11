@@ -6,9 +6,9 @@ function AdminPanel() {
     return (
         <div>
             <Topbar />
-            <div className="flex bg-white dark:bg-grey-3 transition-custom">
+            <div className="flex transition-custom">
                 <Sidebar />
-                <div className="flex-1 bg-grey-light-100 p-[30px]">
+                <div className="flex-1 bg-grey-light-100 dark:bg-grey-3 p-[30px] transition-custom">
                     <Outlet />
                 </div>
             </div>

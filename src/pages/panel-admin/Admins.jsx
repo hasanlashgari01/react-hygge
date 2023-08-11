@@ -52,15 +52,15 @@ function Admins() {
     };
 
     return (
-        <div className="space-container py-10">
+        <div className=" h-20">
             <ToastContainer />
-            <table className="w-full">
+            <table className="table">
                 <thead>
-                    <tr className="bg-green-100/40">
-                        <th className="border py-2.5">Full Name</th>
-                        <th className="border py-2.5">Email</th>
-                        <th className="border py-2.5">Role</th>
-                        <th className="border py-2.5">Date of Register</th>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Date of Register</th>
                     </tr>
                 </thead>
                 {admins && (

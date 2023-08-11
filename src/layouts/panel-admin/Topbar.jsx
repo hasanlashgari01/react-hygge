@@ -24,14 +24,14 @@ function Topbar({ image }) {
 
     return (
         <div className="sticky top-0 flex w-screen tablet:w-full justify-between items-center py-3 px-10 shadow-md z-50 sidebar">
-            <span className="hidden laptop:inline-block text-2xl font-semibold">
+            <span className="hidden laptop:inline-block text-xl font-semibold">
                 Hello, {authContext.userInfos.fullName}
             </span>
             <div>
                 <div></div>
                 <div></div>
                 <div className="relative group">
-                    <div className="flex justify-between items-center gap-3 p-2 bg-gray-50/50 rounded-full laptop:cursor-pointer">
+                    <div className="flex justify-between items-center gap-3 p-2 bg-gray-100 dark:bg-gray-700 rounded-full laptop:cursor-pointer transition-custom">
                         <img
                             src={authContext.userInfos.image ? authContext.userInfos : image}
                             className="w-8 h-8 rounded-full"
@@ -41,16 +41,16 @@ function Topbar({ image }) {
                             {authContext.userInfos.fullName}
                         </span>
                     </div>
-                    <ul className="absolute left-0 laptop:right-0 top-full mt-5 space-y-2 w-52 bg-slate-500 rounded-xl p-2.5 opacity-0 invisible group-hover:opacity-100 delay-75 group-hover:visible transition-all">
+                    <ul className="absolute left-0 laptop:right-0 top-full mt-5 py-3 space-y-2 w-52 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-xl p-2.5 opacity-0 invisible group-hover:opacity-100 delay-75 group-hover:visible transition-all duration-500 ease-linear">
                         <NavLink
                             to="profile"
-                            className="inline-block w-full bg-slate-300 p-2 rounded-md">
+                            className="inline-block w-full bg-slate-300 dark:bg-slate-600 p-2 rounded-md">
                             Profile
                         </NavLink>
                         <NavLink
                             to=""
                             onClick={logoutHandler}
-                            className="inline-block w-full bg-slate-300 p-2 rounded-md">
+                            className="inline-block w-full bg-slate-300 dark:bg-slate-600 p-2 rounded-md">
                             Logout
                         </NavLink>
                     </ul>

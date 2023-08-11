@@ -179,6 +179,7 @@ function Products() {
                     <select
                         id="category"
                         name="category"
+                        className="p-2.5 outline-0"
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}>
                         <option value="Select category" selected disabled>
@@ -197,17 +198,21 @@ function Products() {
             </form>
             <div className="mt-10">
                 <div>
-                    <input type="text" />
+                    <input
+                        type="text"
+                        className="dark:bg-grey-4 dark:text-white/90 py-2 px-4 w-full mobile:w-1/2 desktop:w-1/3 outline-0 rounded-md"
+                        placeholder="Search Product"
+                    />
                 </div>
             </div>
-            <table className="w-full ">
+            <table className="table">
                 <thead>
-                    <tr className="bg-green-100/40">
+                    <tr>
                         {/* <th className="border py-2.5">Image</th> */}
-                        <th className="border py-2.5">Product</th>
-                        <th className="border py-2.5">Status</th>
-                        <th className="border py-2.5">Price</th>
-                        <th className="border py-2.5">Likes</th>
+                        <th className="w-60">Product</th>
+                        <th className="w-1/3">Description</th>
+                        <th>Price</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 {products && (

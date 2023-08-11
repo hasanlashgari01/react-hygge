@@ -75,56 +75,59 @@ function Users() {
     const banUser = userId => console.log(userId);
 
     return (
-        <div className="space-container py-10">
+        <div>
             <ToastContainer />
-            <table className="w-full">
-                <thead>
-                    <tr className="bg-green-100/40">
-                        <th className="border py-2.5">Full Name</th>
-                        <th className="border py-2.5">Email</th>
-                        <th className="border py-2.5">Role</th>
-                        <th className="border py-2.5">Date of Register</th>
-                    </tr>
-                </thead>
-                {users && (
-                    <tbody>
-                        {users.map(user => (
-                            <tr key={user._id}>
-                                <td>{user.fullName}</td>
-                                <td>{user.email}</td>
-                                <td>{user.role}</td>
-                                <td>{user.createdAt.slice(0, 10)}</td>
-                                <td className="flex gap-x-2.5">
-                                    <button
-                                        className="w-16 bg-slate-200"
-                                        onClick={() =>
-                                            setAdmin(user._id, user.fullName, user.role)
-                                        }>
-                                        {user.role === "USER" ? "Admin" : "user"}
-                                    </button>
-                                    <button
-                                        className="w-16 bg-red text-white"
-                                        onClick={() =>
-                                            setIsModal({
-                                                status: "pending",
-                                                id: user._id,
-                                                cb: deleteUser,
-                                            })
-                                        }>
-                                        Delete
-                                    </button>
-                                    <button
-                                        className="w-16 bg-slate-200"
-                                        onClick={() => banUser(user._id)}>
-                                        Ban
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                )}
-            </table>
-            {!users && <ErrorMessage title="There is no user" />}
+            <div>
+                <h1 className="dark:text-green-100 text-4xl font-semibold">Users</h1>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Date of Register</th>
+                        </tr>
+                    </thead>
+                    {users && (
+                        <tbody>
+                            {users.map(user => (
+                                <tr key={user._id}>
+                                    <td>{user.fullName}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
+                                    <td>{user.createdAt.slice(0, 10)}</td>
+                                    <td className="flex gap-x-2.5">
+                                        <button
+                                            className="w-16 bg-slate-200"
+                                            onClick={() =>
+                                                setAdmin(user._id, user.fullName, user.role)
+                                            }>
+                                            {user.role === "USER" ? "Admin" : "user"}
+                                        </button>
+                                        <button
+                                            className="w-16 bg-red text-white"
+                                            onClick={() =>
+                                                setIsModal({
+                                                    status: "pending",
+                                                    id: user._id,
+                                                    cb: deleteUser,
+                                                })
+                                            }>
+                                            Delete
+                                        </button>
+                                        <button
+                                            className="w-16 bg-slate-200"
+                                            onClick={() => banUser(user._id)}>
+                                            Ban
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    )}
+                </table>
+                {!users && <ErrorMessage title="There is no user" />}
+            </div>
         </div>
     );
 }

@@ -104,20 +104,20 @@ function Category() {
                     }>
                     Delete Many
                 </button>
-                <table className="w-full table-auto">
+                <table className="table">
                     <thead>
-                        <tr className="bg-green-10 rounded-xl overflow-hidden">
-                            <th className="text-left border px-4 py-2 w-2">
+                        <tr>
+                            <th className="text-left px-4 py-2 w-2">
                                 <input
                                     type="checkbox"
                                     className="checkbox-custom"
                                     onClick={changeHandler}
                                 />
                             </th>
-                            <th className="text-left border px-4 py-2">Icon</th>
-                            <th className="text-left border px-4 py-2">Title</th>
-                            <th className="text-left border px-4 py-2">Name</th>
-                            <th className="text-right border px-4 py-2 w-32">Actions</th>
+                            <th className="w-40" >Icon</th>
+                            <th>Title</th>
+                            <th>Name</th>
+                            <th className="text-right px-4 py-2 w-32">Actions</th>
                         </tr>
                     </thead>
                     {categories && (
@@ -132,8 +132,8 @@ function Category() {
                                             onChange={() => removeCategory(category._id)}
                                         />
                                     </td>
-                                    <td className="px-4 py-2">{category.icon}</td>
-                                    <td className="px-4 py-2">{category.title}</td>
+                                    <td>{category.icon}</td>
+                                    <td>{category.title}</td>
                                     <td className="px-4 py-2">{category.shortName}</td>
                                     <td className="flex justify-end gap-x-5 px-4 py-2">
                                         <span className="p-1 bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">

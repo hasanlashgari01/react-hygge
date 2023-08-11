@@ -20,7 +20,7 @@
 
 @layer components {
     .transition-custom {
-        @apply transition-colors duration-300 ease-linear;
+        @apply transition-colors duration-500 ease-linear;
     }
 
     .blog-post {
@@ -138,54 +138,83 @@
     }
 
     .form-wrapper {
-        @apply flex flex-col justify-center w-full;
+        @apply relative flex flex-col justify-center w-full;
     }
 
-    .form-text {
-        @apply text-grey-dark-100 dark:text-grey-light-100 text-sm leading-6 font-normal;
-    }
-
-    .form-wrapper span {
-        @apply text-red text-sm;
-    }
-
-    .form-wrapper input:not([type="submit"]) {
-        @apply mt-2 mb-1 tablet:mt-3 tablet:mb-1.5 px-6 py-3 tablet:py-4 h-9 tablet:h-12 bg-transparent text-grey-dark-100 dark:text-grey-light-100 text-base font-semibold outline-grey-1 dark:outline-grey-2 focus:outline-green-100 dark:focus:outline-green-100 outline-none rounded-full transition-custom;
+    .form-wrapper > input[type="text"],
+    .form-wrapper > input[type="number"],
+    .form-wrapper > select {
+        @apply px-4 py-2 dark:bg-grey-4 text-grey-dark-100 dark:text-white/90 text-base font-semibold leading-6 outline-grey-1 dark:outline-grey-2 focus:outline-green-100 dark:focus:outline-green-100 rounded-md transition-custom;
     }
 
     .form-wrapper input[type="submit"] {
         @apply bg-green-100 py-3 text-center rounded-full text-grey-light-100 font-bold cursor-pointer;
     }
 
-    .p-admin__link {
-        @apply relative flex gap-2.5 py-4 px-6 text-black text-sm rounded-xl transition-custom;
+    .form-wrapper span {
+        @apply absolute -bottom-6 py-0.5 px-2 bg-red/20 text-red/95 text-sm font-bold;
     }
 
-    .p-admin__link--active::before {
+    .p-admin__link {
+        @apply relative flex gap-2.5 py-4 px-6 text-black dark:text-white text-sm rounded-xl transition-custom;
+    }
+
+    .p-admin__link::before {
         content: "";
         position: absolute;
-        top: 0;
+        top: 50%;
         left: -12px;
-        width: 5px;
-        height: 100%;
+        height: 75%;
+        transform: translateY(-50%);
         background-color: #00cc96;
         border-radius: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         -ms-border-radius: 10px;
         -o-border-radius: 10px;
+        @apply transition-all duration-500 ease-linear;
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
     }
 
     .p-admin__link--active {
-        @apply text-green-100 font-semibold;
+        @apply text-green-100 dark:text-green-100 font-semibold;
+    }
+
+    .p-admin__link--active::before {
+        width: 5px;
+        opacity: 100%;
+        visibility: visible;
+        @apply transition-all duration-500 ease-linear;
     }
 
     .sidebar {
-        @apply bg-white dark:bg-black dark:text-white transition-custom;
+        @apply bg-white dark:bg-grey-2 dark:text-white transition-custom;
     }
 
     .checkbox-custom {
         @apply w-4 h-4 outline-0 appearance-none border border-blue-500 checked:bg-blue-500 checked:rounded-[4px] transition-all transition-custom;
+    }
+
+    .table {
+        @apply mt-10 table-auto w-full border-collapse border border-slate-300 dark:border-gray-800 transition-custom;
+    }
+
+    thead tr {
+        @apply bg-green-10 dark:text-white transition-custom;
+    }
+
+    thead tr > th {
+        @apply text-left p-2;
+    }
+
+    tbody tr {
+        @apply hover:bg-slate-100 dark:hover:bg-slate-800 dark:text-white/90 border-b border-gray-300 dark:border-gray-800 last:border-0 transition-custom duration-150 ease-out;
+    }
+
+    tbody tr > td {
+        @apply p-2;
     }
 }
 
