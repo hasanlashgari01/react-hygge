@@ -2,9 +2,11 @@ import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import SmoothScrollNavLink from "../../components/SmoothScrollNavLink";
+import AuthContext from "../../context/authContext";
 import CartContext from "../../context/cartContext";
 
 function Header() {
+    const { isLoggedIn, userInfos } = useContext(AuthContext);
     const { cart } = useContext(CartContext);
 
     const [isShowMenu, setIsShowMenu] = useState(false);
@@ -48,7 +50,7 @@ function Header() {
                     </svg>
                     <div className="relative group">
                         <SmoothScrollLink
-                            to="/cart"
+                            to="/my-account/cart"
                             className="relative flex justify-center items-center w-12 h-12 laptop:cursor-pointer">
                             <svg className="w-6 h-6 dark:text-white">
                                 <use href="#cart"></use>
@@ -58,11 +60,25 @@ function Header() {
                             </span>
                         </SmoothScrollLink>
                     </div>
-                    <SmoothScrollLink to="/register">
-                        <svg className="hidden tablet:inline-block w-6 h-6 dark:text-white">
-                            <use href="#user"></use>
-                        </svg>
-                    </SmoothScrollLink>
+                    {!isLoggedIn && (
+                        <SmoothScrollLink to="/register">
+                            <svg className="hidden tablet:inline-block w-6 h-6 dark:text-white">
+                                <use href="#user"></use>
+                            </svg>
+                        </SmoothScrollLink>
+                    )}
+                    {isLoggedIn && (
+                        <SmoothScrollLink
+                            to={`${
+                                userInfos?.role === "ADMIN"
+                                    ? "/p-admin/index"
+                                    : "/my-account/profile"
+                            } `}>
+                            <svg className="hidden tablet:inline-block w-6 h-6 dark:text-white">
+                                <use href="#user"></use>
+                            </svg>
+                        </SmoothScrollLink>
+                    )}
                 </div>
             </div>
             <div className={`navigation ${isShowMenu ? "navigation--active" : ""}`}>

@@ -216,6 +216,14 @@
     tbody tr > td {
         @apply p-2;
     }
+
+    .p-user__link {
+        @apply flex items-center gap-x-2 w-48 py-1 text-[#171F26] text-base font-normal leading-6 transition-custom;
+    }
+
+    .p-user__link--active {
+        @apply text-[#0182FE] transition-custom duration-150;
+    }
 }
 
 @media screen and (min-width: 1024px) {
