@@ -73,9 +73,11 @@ function Admins() {
                                 <td>{admin.createdAt.slice(0, 10)}</td>
                                 <td className="flex gap-x-2.5">
                                     <button
-                                        className="w-16 bg-slate-200"
+                                        className="p-1 bg-zinc-200/80 bg-zinc-200 rounded-md laptop:cursor-pointer"
                                         onClick={() => setUser(admin._id, admin.fullName)}>
-                                        User
+                                        <svg className="w-6 h-6">
+                                            <use href="#user-minus"></use>
+                                        </svg>
                                     </button>
                                 </td>
                             </tr>

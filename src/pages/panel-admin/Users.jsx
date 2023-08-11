@@ -98,14 +98,16 @@ function Users() {
                                     <td>{user.createdAt.slice(0, 10)}</td>
                                     <td className="flex gap-x-2.5">
                                         <button
-                                            className="w-16 bg-slate-200"
+                                            className="p-1 bg-zinc-200/80 bg-zinc-200 rounded-md laptop:cursor-pointer"
                                             onClick={() =>
                                                 setAdmin(user._id, user.fullName, user.role)
                                             }>
-                                            {user.role === "USER" ? "Admin" : "user"}
+                                            <svg className="w-6 h-6">
+                                                <use href="#user-plus"></use>
+                                            </svg>
                                         </button>
                                         <button
-                                            className="w-16 bg-red text-white"
+                                            className="p-1 bg-red/10 text-red rounded-md laptop:cursor-pointer"
                                             onClick={() =>
                                                 setIsModal({
                                                     status: "pending",
@@ -113,12 +115,16 @@ function Users() {
                                                     cb: deleteUser,
                                                 })
                                             }>
-                                            Delete
+                                            <svg className="w-6 h-6">
+                                                <use href="#trash"></use>
+                                            </svg>
                                         </button>
                                         <button
-                                            className="w-16 bg-slate-200"
+                                            className="p-1 bg-zinc-200/80 bg-zinc-200 rounded-md laptop:cursor-pointer"
                                             onClick={() => banUser(user._id)}>
-                                            Ban
+                                            <svg className="w-6 h-6">
+                                                <use href="#x-circle"></use>
+                                            </svg>
                                         </button>
                                     </td>
                                 </tr>

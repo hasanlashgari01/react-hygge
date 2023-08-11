@@ -223,8 +223,14 @@ function Products() {
                                 <td>{product.title}</td>
                                 <td>{product.description}</td>
                                 <td>{product.priceOriginal}</td>
-                                <td className="flex gap-x-5">
-                                    <button
+                                <td className="flex gap-x-5 px-4 py-2">
+                                    <span className="p-1 bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">
+                                        <svg className="w-6 h-6">
+                                            <use href="#pencil-square"></use>
+                                        </svg>
+                                    </span>
+                                    <span
+                                        className="p-1 bg-red/10 text-red rounded-md laptop:cursor-pointer"
                                         onClick={() =>
                                             setIsModal({
                                                 status: "pending",
@@ -232,8 +238,10 @@ function Products() {
                                                 cb: deleteProduct,
                                             })
                                         }>
-                                        Delete
-                                    </button>
+                                        <svg className="w-6 h-6">
+                                            <use href="#trash"></use>
+                                        </svg>
+                                    </span>
                                 </td>
                             </tr>
                         ))}

@@ -114,10 +114,10 @@ function Category() {
                                     onClick={changeHandler}
                                 />
                             </th>
-                            <th className="w-40" >Icon</th>
+                            <th className="w-40">Icon</th>
                             <th>Title</th>
                             <th>Name</th>
-                            <th className="text-right px-4 py-2 w-32">Actions</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     {categories && (
@@ -135,7 +135,7 @@ function Category() {
                                     <td>{category.icon}</td>
                                     <td>{category.title}</td>
                                     <td className="px-4 py-2">{category.shortName}</td>
-                                    <td className="flex justify-end gap-x-5 px-4 py-2">
+                                    <td className="flex gap-x-5 px-4 py-2">
                                         <span className="p-1 bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">
                                             <svg className="w-6 h-6">
                                                 <use href="#pencil-square"></use>
