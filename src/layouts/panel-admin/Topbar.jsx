@@ -10,8 +10,8 @@ function Topbar({ image }) {
     };
 
     return (
-        <div className="sticky top-0 flex justify-between items-center py-3 px-10 sidebar">
-            <span className="hidden tablet:inline-block text-2xl font-semibold">
+        <div className="sticky top-0 flex justify-between items-center py-3 px-10 shadow-md z-50 sidebar">
+            <span className="hidden laptop:inline-block text-2xl font-semibold">
                 Hello, {authContext.userInfos.fullName}
             </span>
             <div>

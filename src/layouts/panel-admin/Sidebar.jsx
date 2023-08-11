@@ -8,25 +8,43 @@ function Sidebar() {
         isActive ? "p-admin__link p-admin__link--active" : "p-admin__link";
 
     return (
-        <div className="static top-32 hidden laptop:block w-64 min-h-screen p-3 sidebar">
+        <div className="sticky top-0 hidden laptop:block w-64 p-3 sidebar">
             <nav>
                 <ul className="flex flex-col">
                     <NavLink to="index" className={navLinkStyle}>
+                        <svg className="w-5 h-5">
+                            <use href="#home"></use>
+                        </svg>
                         Home
                     </NavLink>
                     <NavLink to="users" className={navLinkStyle}>
+                        <svg className="w-5 h-5">
+                            <use href="#users"></use>
+                        </svg>
                         Users
                     </NavLink>
                     <NavLink to="admins" className={navLinkStyle}>
+                        <svg className="w-5 h-5">
+                            <use href="#receipt-percent"></use>
+                        </svg>
                         Admins
                     </NavLink>
                     <NavLink to="products" className={navLinkStyle}>
+                        <svg className="w-5 h-5">
+                            <use href="#receipt-percent"></use>
+                        </svg>
                         Products
                     </NavLink>
                     <NavLink to="category" className={navLinkStyle}>
+                        <svg className="w-5 h-5">
+                            <use href="#bag"></use>
+                        </svg>
                         Categories
                     </NavLink>
                     <NavLink to="off" className={navLinkStyle}>
+                        <svg className="w-5 h-5">
+                            <use href="#receipt-percent"></use>
+                        </svg>
                         Off
                     </NavLink>
                 </ul>
