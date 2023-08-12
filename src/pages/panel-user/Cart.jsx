@@ -1,9 +1,4 @@
 import { useState } from "react";
-import SubTitle from "../../components/main/SubTitle";
-import Title from "../../components/main/Title";
-import NewsLetter from "../../components/main/NewsLetter";
-import Header from "../../layouts/main/Header";
-import Footer from "../../layouts/main/Footer";
 
 function Cart() {
     const [products, setProducts] = useState([1, 2]);

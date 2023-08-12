@@ -22,7 +22,7 @@ function Products() {
                 <SubTitle subtitle="- Our Products" />
                 <Title title="Explore our Products" />
             </div>
-            <div className="grid grid-cols-1 mobile:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-x-12 laptop:gap-x-14 desktop:gap-x-12 gap-y-16 mt-14">
+            <div className="grid grid-cols-1 xmobile:grid-cols-2 tablet:grid-cols-3 bigDesktop:grid-cols-4 gap-3.5 mobile:gap-5 desktop:gap-10 gap-y-8 mt-14">
                 {products ? (
                     products.map(product => <Product key={product._id} product={product} />)
                 ) : (

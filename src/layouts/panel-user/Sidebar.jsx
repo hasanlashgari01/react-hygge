@@ -6,7 +6,7 @@ function Sidebar({ status, setClose }) {
 
     return (
         <div
-            className={`${status} laptop: flex flex-col gap-y-4 h-fit py-6 px-[28px] border border - [#cbcbcb] rounded - lg`}>
+            className={`${status} laptop:flex flex-col gap-y-4 h-fit py-6 px-[28px] border border-[#cbcbcb] dark:border-grey-2 rounded - lg`}>
             <NavLink to="/" className={linkStyle} onClick={setClose}>
                 <svg className="w-6 h-6">
                     <use href="#home"></use>

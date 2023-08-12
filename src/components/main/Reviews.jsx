@@ -32,7 +32,7 @@ function Reviews({ image }) {
                     <Title title="What our Customers are Saying" />
                 </div>
 
-                <div className="laptop:w-[400px] mt-28 mb-12">
+                <div className="laptop:w-[400px] mt-10 mb-12">
                     <Swiper
                         slidesPerView={1}
                         keyboard={{
@@ -55,10 +55,10 @@ function Reviews({ image }) {
                                     <div className="w-20 h-20 mx-auto laptop:mx-0 mb-8 p-2 border-2 border-green-100 rounded-full">
                                         <img src={image} alt="" />
                                     </div>
-                                    <h3 className="mb-4 dark:text-grey-light-100 text-2xl/[40px] font-semibold">
+                                    <h3 className="mb-4 text-green-100 text-xl laptop:text-2xl leading-10 font-semibold">
                                         {review.author.fullName}
                                     </h3>
-                                    <p className="block dark:text-grey-light-100 mb-16 mobile:mb-20 mx-auto max-w-xs mobile:max-w-2xl text-xl/[32px] font-normal">
+                                    <p className="block dark:text-grey-light-100 mb-10 mobile:mb-10 mx-auto max-w-md mobile:max-w-2xl text-base/7 laptop:text-xl/8 font-normal">
                                         {review.body}
                                     </p>
                                 </div>

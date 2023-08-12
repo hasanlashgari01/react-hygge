@@ -1,4 +1,4 @@
-function Breadcrumbs() {
+function Breadcrumbs({ productTitle }) {
     return (
         <ul className="hidden bigDesktop:inline-flex mt-10 mb-12 gap-6">
             <li className="flex items-center gap-x-4 text-grey-dark-100 dark:text-grey-light-100 text-xl/[32px] font-medium">
@@ -20,7 +20,7 @@ function Breadcrumbs() {
                 </svg>
             </li>
             <li className="flex items-center gap-x-4 text-grey-dark-100 dark:text-grey-light-100 text-xl/[32px] font-medium">
-                Sun Cream 950 ml
+                {productTitle}
             </li>
         </ul>
     );

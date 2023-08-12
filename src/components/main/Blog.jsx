@@ -34,8 +34,8 @@ function Blog() {
                     pagination={true}
                     breakpoints={{
                         478: {
-                            slidesPerView: 1.4,
-                            spaceBetween: 12,
+                            slidesPerView: 1.2,
+                            spaceBetween: 16,
                         },
                     }}
                     modules={[Keyboard]}
@@ -72,7 +72,7 @@ function Blog() {
                     </div>
                 </Swiper>
 
-                <div className="blog-post">
+                <div className="grid tablet:grid-cols-2 desktop:grid-cols-3 gap-12 mt-12">
                     {blogs.map(blog => (
                         <BlogTablet key={blog._id} blog={blog} />
                     ))}

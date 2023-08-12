@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { FreeMode, Keyboard, Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,13 +17,19 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import CartContext from "../../context/cartContext";
+import { quantityCount } from "../../helper/func";
 
 function ProductPage() {
+    const { state, dispatch } = useContext(CartContext);
+
+    console.log(state?.selectedItems[0]?.quantity);
+
     useTitle("Product Page");
 
     let { productId } = useParams();
 
-    const [product, setProduct] = useState();
+    const [product, setProduct] = useState({});
     const [images, setImages] = useState([]);
     const [productCount, setProductCount] = useState(1);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -34,28 +40,17 @@ function ProductPage() {
         fetch(`http://localhost:4000/api/products/${productId}`)
             .then(res => res.json())
             .then(result => {
-                console.log(result);
                 setProduct(result);
-                setProduct(result.image);
+                // setProduct(result?.image);
             })
             .catch(err => err);
     }, []);
-
-    console.log(product);
-
-    const decreaseCount = () => {
-        productCount > 0 && setProductCount(prevState => prevState - 1);
-    };
-
-    const increaseCount = () => {
-        setProductCount(prevState => prevState + 1);
-    };
 
     return (
         <div>
             <Header />
             <div className="space-container">
-                <Breadcrumbs />
+                <Breadcrumbs productTitle={product.title} />
                 <div className="flex flex-col bigDesktop:flex-row gap-x-[72px] mt-14 tablet:mt-16 bigDesktop:mt-4">
                     {/* Images */}
                     <div className="flex flex-col laptop:flex-row-reverse justify-center items-center laptop:gap-6 mb-14 tablet:mb-16 overflow-hidden">
@@ -134,29 +129,48 @@ function ProductPage() {
                     <div className="flex flex-col gap-y-10 bigDesktop:gap-y-20 items-center bigDesktop:items-start bigDesktop:justify-center bigDesktop:h-[504px]">
                         <div>
                             <SubTitle subtitle="- Selling Fast" />
-                            {product && <Title title={product.title} />}
-                            {product && (
-                                <ProductDetails
-                                    ability={product.ability}
-                                    priceOriginal={product.priceOriginal}
-                                />
-                            )}
+                            <Title title={product.title} />
+                            <ProductDetails
+                                ability={product.ability}
+                                priceOriginal={product.priceOriginal}
+                            />
                         </div>
                         <div className="flex flex-wrap justify-center items-center gap-6">
                             <div className="flex justify-between items-center w-[136px] h-12 tablet:w-[176px] tablet:h-16 py-4 px-2 tablet:p-4 border-2 border-grey-1 dark:border-grey-2 rounded-full select-none">
-                                <span
-                                    className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                    onClick={decreaseCount}>
-                                    <svg className="w-4 h-4 text-black dark:text-white">
-                                        <use href="#arrow-left"></use>
-                                    </svg>
-                                </span>
+                                <div>
+                                    {quantityCount(state, product) > 1 && (
+                                        <span
+                                            className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
+                                            onClick={() =>
+                                                dispatch({ type: "DECREASE", payload: product })
+                                            }>
+                                            <svg className="w-4 h-4 text-black dark:text-white">
+                                                <use href="#arrow-left"></use>
+                                            </svg>
+                                        </span>
+                                    )}
+                                    {/* {quantityCount(state, product) == 1 && (
+                                        <span
+                                            className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
+                                            onClick={() =>
+                                                dispatch({ type: "REMOVE_ITEM", payload: product })
+                                            }>
+                                            <svg className="w-4 h-4 text-black dark:text-white">
+                                                <use href="#trash"></use>
+                                            </svg>
+                                        </span>
+                                    )} */}
+                                </div>
                                 <span className="inline-block text-grey-dark-100 dark:text-grey-light-100 font-bold text-xl tablet:text-2xl leading-8">
-                                    {productCount}
+                                    {state.selectedItems.quantity
+                                        ? state.selectedItems.quantity
+                                        : 0}
                                 </span>
                                 <span
                                     className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                    onClick={increaseCount}>
+                                    onClick={() =>
+                                        dispatch({ type: "INCREASE", payload: product })
+                                    }>
                                     <svg className="w-4 h-4 text-black dark:text-white">
                                         <use href="#arrow-right"></use>
                                     </svg>
@@ -164,7 +178,11 @@ function ProductPage() {
                             </div>
 
                             <div className="flex items-center gap-x-6">
-                                <span className="py-3 px-6 tablet:py-4 tablet:px-10 bg-green-100 text-grey-light-100 tablet:text-xl/[32px] font-bold rounded-full cursor-pointer">
+                                <span
+                                    className="py-3 px-6 tablet:py-4 tablet:px-10 bg-green-100 text-grey-light-100 tablet:text-xl/[32px] font-bold rounded-full cursor-pointer"
+                                    onClick={() =>
+                                        dispatch({ type: "ADD_ITEM", payload: product })
+                                    }>
                                     Add to Cart
                                 </span>
 

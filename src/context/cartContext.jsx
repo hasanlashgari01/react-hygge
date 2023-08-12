@@ -1,12 +1,20 @@
 import { createContext } from "react";
 
+// const initialState = {
+//     selectedItems: [],
+//     itemsCounter: 0,
+//     total: 0,
+//     checkout: false,
+// };
+
 const dataContext = {
-    cart: [],
-    addProductToCart: () => {},
-    removeProductFromCart: () => {},
-    removeAllProductsFromCart: () => {},
-    increaseProduct: () => {},
-    decreaseProduct: () => {},
+    initialState: {
+        selectedItems: [],
+        itemsCounter: 0,
+        total: 0,
+        checkout: false,
+    },
+    cartReducer: () => {},
 };
 
 const CartContext = createContext(dataContext);

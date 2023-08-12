@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage";
 import Breadcrumbs from "../../components/main/Breadcrumbs";
 import NewsLetter from "../../components/main/NewsLetter";
@@ -16,9 +16,20 @@ function CategoryProducts() {
     const [category, setCategory] = useState({});
     const [products, setProducts] = useState({});
     const [isPending, setIsPending] = useState(true);
+    const [filter, setFilter] = useState({ price: 1, date: 1 });
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/categories/${shortName}`)
+        fetch(
+            `http://localhost:4000/api/categories/${shortName}`
+            /* {
+                ,
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ filter }),
+            } */
+        )
             .then(res => res.json())
             .then(result => {
                 setCategory(result);
@@ -97,7 +108,7 @@ function CategoryProducts() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-1 mobile:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-x-12 laptop:gap-x-14 desktop:gap-x-12 gap-y-16 mt-14">
+                            <div className="grid grid-cols-1 xmobile:grid-cols-2 tablet:grid-cols-3 bigDesktop:grid-cols-4 gap-3.5 mobile:gap-5 desktop:gap-10 gap-y-8 mt-14">
                                 {products &&
                                     products.map(product => (
                                         <Product key={product._id} product={product} />
