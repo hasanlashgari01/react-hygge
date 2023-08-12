@@ -23,8 +23,6 @@ import { quantityCount } from "../../helper/func";
 function ProductPage() {
     const { state, dispatch } = useContext(CartContext);
 
-    console.log(state?.selectedItems[0]?.quantity);
-
     useTitle("Product Page");
 
     let { productId } = useParams();
@@ -41,7 +39,7 @@ function ProductPage() {
             .then(res => res.json())
             .then(result => {
                 setProduct(result);
-                // setProduct(result?.image);
+                setImages(result.image);
             })
             .catch(err => err);
     }, []);
@@ -72,18 +70,17 @@ function ProductPage() {
                                     swiper.params.navigation.nextEl = desktopProductNextRef.current;
                                 }}
                                 className="mySwiper2">
-                                <div className="bg-grey-1 dark:bg-grey-2 w-[311px] h-[311px] tablet:w-[504px] tablet:h-[504px] mx-auto py-[51px] rounded-[48px] tablet:rounded-[64px]">
-                                    <img
-                                        src={`/public/images/products/Product 1.png`}
-                                        className="h-full mx-auto"
-                                        alt=""
-                                    />
-                                </div>
-
-                                {/* {product.map(index => (
+                                {images.map((image, index) => (
                                     <SwiperSlide key={index}>
+                                        <div className="bg-grey-1 dark:bg-grey-2 w-[311px] h-[311px] tablet:w-[504px] tablet:h-[504px] mx-auto py-[51px] rounded-[48px] tablet:rounded-[64px]">
+                                            <img
+                                                src={`/public/images/products/${image}`}
+                                                className="h-full mx-auto"
+                                                alt=""
+                                            />
+                                        </div>
                                     </SwiperSlide>
-                                ))} */}
+                                ))}
                             </Swiper>
                         </div>
 
