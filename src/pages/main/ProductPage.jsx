@@ -2,6 +2,10 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { FreeMode, Keyboard, Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import CartContext from "../../context/cartContext";
+import { quantityCount } from "../../helper/func";
+import AuthContext from "../../context/authContext";
+import useToken from "../../hooks/useToken";
 import Breadcrumbs from "../../components/main/Breadcrumbs";
 import NewsLetter from "../../components/main/NewsLetter";
 import ProductDetails from "../../components/main/ProductDetails";
@@ -17,18 +21,20 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import CartContext from "../../context/cartContext";
-import { quantityCount } from "../../helper/func";
 
 function ProductPage() {
+    const { userInfos } = useContext(AuthContext);
     const { state, dispatch } = useContext(CartContext);
 
     useTitle("Product Page");
+
+    const token = useToken();
 
     let { productId } = useParams();
 
     const [product, setProduct] = useState({});
     const [images, setImages] = useState([]);
+    const [isInLikeList, setIsInLikeList] = useState();
     const [productCount, setProductCount] = useState(1);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const desktopProductPrevRef = useRef(null);
@@ -40,9 +46,34 @@ function ProductPage() {
             .then(result => {
                 setProduct(result);
                 setImages(result.image);
+                setIsInLikeList(result.isLike);
             })
             .catch(err => err);
-    }, []);
+    }, [isInLikeList]);
+
+    const addOrRemoveLike = (productId, userId) => {
+        if (!isInLikeList) {
+            fetch(`http://localhost:4000/api/products/like/${productId}/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then(res => res.json())
+                .then(result => {
+                    setIsInLikeList(true);
+                });
+        } else {
+            fetch(`http://localhost:4000/api/products/unlike/${productId}/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then(res => res.json())
+                .then(result => {
+                    setIsInLikeList(false);
+                });
+        }
+    };
 
     return (
         <div>
@@ -182,9 +213,15 @@ function ProductPage() {
                                     }>
                                     Add to Cart
                                 </span>
-
-                                <span className="inline-flex p-3 tablet:p-4 border-2 text-black dark:text-white border-grey-1 dark:border-grey-2 rounded-full cursor-pointer">
-                                    <svg className="w-6 h-6 tablet:w-8 tablet:h-8">
+                                <span
+                                    className="inline-flex p-3 tablet:p-4 border-2 border-grey-1 dark:border-grey-2 rounded-full cursor-pointer"
+                                    onClick={() => addOrRemoveLike(product._id, userInfos._id)}>
+                                    <svg
+                                        className={`w-6 tablet:w-8 h-6 tablet:h-8 ${
+                                            isInLikeList
+                                                ? "text-red stroke-red transition-custom"
+                                                : "text-white stroke-black"
+                                        } `}>
                                         <use href="#heart"></use>
                                     </svg>
                                 </span>

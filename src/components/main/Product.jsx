@@ -32,10 +32,10 @@ function Product({ product }) {
                     discount={product.priceDiscount}
                 />
                 <div className="flex items-center justify-between mt-4">
-                    <button className="hidden laptop:inline-block py-2 px-3 bg-green-100 dark:bg-green-100/5 text-green-800 dark:text-green-400 font-semibold rounded-3xl">
+                    <button className="hidden laptop:inline-block py-2 px-3 bg-green-200 dark:bg-green-100/5 text-green-800 dark:text-green-400 font-semibold rounded-3xl">
                         Add to cart
                     </button>
-                    <span className="inline-block laptop:hidden p-2.5 bg-green-100 dark:bg-green-100/5 text-green-800 dark:text-green-400 rounded-full desktop:cursor-pointer">
+                    <span className="inline-block laptop:hidden p-2.5 bg-green-200 dark:bg-green-100/5 text-green-800 dark:text-green-400 rounded-full desktop:cursor-pointer">
                         <svg className="w-4 h-4">
                             <use href="#cart"></use>
                         </svg>
