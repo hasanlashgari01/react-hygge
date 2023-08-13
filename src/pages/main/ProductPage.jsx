@@ -35,6 +35,7 @@ function ProductPage() {
     const [product, setProduct] = useState({});
     const [images, setImages] = useState([]);
     const [isInLikeList, setIsInLikeList] = useState();
+    const [isInBookmarkList, setIsInBookmarkList] = useState();
     const [productCount, setProductCount] = useState(1);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const desktopProductPrevRef = useRef(null);
@@ -47,9 +48,10 @@ function ProductPage() {
                 setProduct(result);
                 setImages(result.image);
                 setIsInLikeList(result.isLike);
+                setIsInBookmarkList(result.isBookmark)
             })
             .catch(err => err);
-    }, [isInLikeList]);
+    }, [isInLikeList, isInBookmarkList]);
 
     const addOrRemoveLike = (productId, userId) => {
         if (!isInLikeList) {
@@ -59,7 +61,7 @@ function ProductPage() {
                 },
             })
                 .then(res => res.json())
-                .then(result => {
+                .then(() => {
                     setIsInLikeList(true);
                 });
         } else {
@@ -69,8 +71,32 @@ function ProductPage() {
                 },
             })
                 .then(res => res.json())
-                .then(result => {
+                .then(() => {
                     setIsInLikeList(false);
+                });
+        }
+    };
+
+    const addOrRemoveBookmark = (productId, userId) => {
+        if (!isInBookmarkList) {
+            fetch(`http://localhost:4000/api/products/bookmark/${productId}/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then(res => res.json())
+                .then(() => {
+                    setIsInBookmarkList(true);
+                });
+        } else {
+            fetch(`http://localhost:4000/api/products/remove-bookmark/${productId}/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then(res => res.json())
+                .then(() => {
+                    setIsInBookmarkList(false);
                 });
         }
     };
@@ -219,10 +245,22 @@ function ProductPage() {
                                     <svg
                                         className={`w-6 tablet:w-8 h-6 tablet:h-8 ${
                                             isInLikeList
-                                                ? "text-red stroke-red transition-custom"
-                                                : "text-white stroke-black"
+                                                ? "text-red stroke-red"
+                                                : "text-white stroke-black transition-custom ease-out"
                                         } `}>
                                         <use href="#heart"></use>
+                                    </svg>
+                                </span>
+                                <span
+                                    className="inline-flex p-3 tablet:p-4 border-2 border-grey-1 dark:border-grey-2 rounded-full cursor-pointer"
+                                    onClick={() => addOrRemoveBookmark(product._id, userInfos._id)}>
+                                    <svg
+                                        className={`w-6 tablet:w-8 h-6 tablet:h-8 ${
+                                            isInBookmarkList
+                                                ? "text-black stroke-black"
+                                                : "text-white stroke-black transition-custom ease-out"
+                                        } `}>
+                                        <use href="#bookmark"></use>
                                     </svg>
                                 </span>
                             </div>
