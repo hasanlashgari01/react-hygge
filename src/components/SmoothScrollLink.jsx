@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
 const SmoothScrollLink = ({ to, children, className }) => {
-    const handleLinkClick = e => {
+    const handleLinkClick = () => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth",
+            // behavior: "smooth",
         });
     };
 

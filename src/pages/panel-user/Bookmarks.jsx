@@ -1,16 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import AuthContext from "../../context/authContext";
 import Product from "../../components/main/Product";
 import Empty from "../../components/panel-user/Empty";
 
 function Bookmarks() {
-    const { userInfos } = useContext(AuthContext);
-
-    const [bookmarks, setBookmarks] = useState([]);
-
-    useEffect(() => {
-        setBookmarks(userInfos.bookmarks);
-    }, []);
+    const { bookmarks } = useContext(AuthContext);
 
     return (
         <>

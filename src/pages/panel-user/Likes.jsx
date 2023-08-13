@@ -1,16 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import AuthContext from "../../context/authContext";
 import Product from "../../components/main/Product";
 import Empty from "../../components/panel-user/Empty";
 
 function Likes() {
-    const { userInfos } = useContext(AuthContext);
-
-    const [likes, setLikes] = useState([]);
-
-    useEffect(() => {
-        setLikes(userInfos.likes);
-    }, []);
+    const { likes } = useContext(AuthContext);
 
     return (
         <>

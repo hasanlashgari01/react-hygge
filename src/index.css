@@ -214,11 +214,11 @@
     }
 
     .p-user__link {
-        @apply flex items-center gap-x-2 w-48 py-1 text-[#171F26] dark:text-white text-base font-normal leading-6 transition-custom;
+        @apply flex items-center gap-x-2 w-48 py-1 text-[#171F26] dark:text-white stroke-black text-base font-normal leading-6 transition-custom;
     }
 
     .p-user__link--active {
-        @apply text-green-100 dark:text-green-100 transition-custom duration-150;
+        @apply text-green-100 dark:text-green-100 stroke-green-100 transition-custom duration-150;
     }
 }
 

@@ -3,14 +3,11 @@ import { useContext, useState } from "react";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import SmoothScrollNavLink from "../../components/SmoothScrollNavLink";
 import AuthContext from "../../context/authContext";
-import CartContext from "../../context/cartContext";
 
 function Header() {
     const { isLoggedIn, userInfos } = useContext(AuthContext);
-    const { cart } = useContext(CartContext);
 
     const [isShowMenu, setIsShowMenu] = useState(false);
-    // const [cart, setCart] = useState(false);
 
     const navLinkStyle = ({ isActive }) =>
         isActive ? "navigation-link navigation-link--active" : "navigation-link";
@@ -56,7 +53,7 @@ function Header() {
                                 <use href="#cart"></use>
                             </svg>
                             <span className="absolute top-0 right-0 inline-flex justify-center items-center w-4 h-4 p-2.5 bg-pink-100 rounded-full">
-                                {cart}
+                                0
                             </span>
                         </SmoothScrollLink>
                     </div>

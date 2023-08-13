@@ -20,13 +20,13 @@ function Sidebar({ status, setClose }) {
                 Cart
             </NavLink>
             <NavLink to="likes" className={linkStyle} onClick={setClose}>
-                <svg className="w-6 h-6">
+                <svg className="w-6 h-6 text-transparent stroke-inherit">
                     <use href="#heart"></use>
                 </svg>
                 Likes
             </NavLink>
             <NavLink to="bookmarks" className={linkStyle} onClick={setClose}>
-                <svg className="w-6 h-6">
+                <svg className="w-6 h-6 text-transparent stroke-inherit">
                     <use href="#bookmark"></use>
                 </svg>
                 Bookmarks

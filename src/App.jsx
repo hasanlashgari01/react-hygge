@@ -1,57 +1,7 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
 import { routes } from "./router";
 import AuthContext from "./context/authContext";
-import CartContext from "./context/cartContext";
-
-const cartReducer = (state, action) => {
-    switch (action.type) {
-        case "ADD_ITEM":
-            if (!state.selectedItems.find(item => item._id === action.payload._id)) {
-                state.selectedItems.push({
-                    ...action.payload,
-                    quantity: 1,
-                });
-            }
-            return { ...state, selectedItems: [...state.selectedItems] };
-        case "REMOVE_ITEM":
-            const newSelectedItems = state.selectedItems.filter(
-                item => item._id !== action.payload._id
-            );
-            return {
-                ...state,
-                selectedItems: [...newSelectedItems],
-            };
-        case "INCREASE":
-            const indexI = state.selectedItems.findIndex(item => item._id === action.payload._id);
-            state.selectedItems[indexI].quantity++;
-            return {
-                ...state,
-            };
-        case "DECREASE":
-            const indexD = state.selectedItems.findIndex(item => item._id === action.payload._id);
-            state.selectedItems[indexD].quantity--;
-            return {
-                ...state,
-            };
-        case "CHECKOUT":
-            return {
-                selectedItems: [],
-                itemsCounter: 0,
-                total: 0,
-                checkout: true,
-            };
-        case "CLEAR":
-            return {
-                selectedItems: [],
-                itemsCounter: 0,
-                total: 0,
-                checkout: false,
-            };
-        default:
-            return state;
-    }
-};
 
 function App() {
     const router = useRoutes(routes);
@@ -59,13 +9,8 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(null);
     const [token, setToken] = useState(null);
     const [userInfos, setUserInfos] = useState(null);
-    const [cart, setCart] = useState(0);
-    const [initialState, setInitialState] = useState({
-        selectedItems: [],
-        itemsCounter: 0,
-        total: 0,
-        checkout: false,
-    });
+    const [likes, setLikes] = useState(null);
+    const [bookmarks, setBookmarks] = useState(null);
 
     useEffect(() => {
         const localStorageData = localStorage.getItem("user");
@@ -79,12 +24,12 @@ function App() {
                 .then(userData => {
                     setIsLoggedIn(true);
                     setUserInfos(userData.user);
+                    setLikes(userData.user.likes);
+                    setBookmarks(userData.user.bookmarks);
                 })
                 .catch(error => error);
         }
-    }, []);
-
-    const [state, dispatch] = useReducer(cartReducer, initialState);
+    }, [likes, bookmarks]);
 
     const login = (userData, token) => {
         setIsLoggedIn(true);
@@ -102,8 +47,9 @@ function App() {
 
     return (
         <div className="bg-white dark:bg-grey-3 transition-custom">
-            <AuthContext.Provider value={{ isLoggedIn, token, userInfos, login, logout }}>
-                <CartContext.Provider value={{ state, dispatch }}>{router}</CartContext.Provider>
+            <AuthContext.Provider
+                value={{ isLoggedIn, token, userInfos, likes, bookmarks, login, logout }}>
+                {router}
             </AuthContext.Provider>
         </div>
     );

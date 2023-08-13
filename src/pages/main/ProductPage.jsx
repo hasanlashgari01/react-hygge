@@ -2,8 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 import { FreeMode, Keyboard, Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import CartContext from "../../context/cartContext";
-import { quantityCount } from "../../helper/func";
 import AuthContext from "../../context/authContext";
 import useToken from "../../hooks/useToken";
 import Breadcrumbs from "../../components/main/Breadcrumbs";
@@ -24,7 +22,6 @@ import "swiper/css/thumbs";
 
 function ProductPage() {
     const { userInfos } = useContext(AuthContext);
-    const { state, dispatch } = useContext(CartContext);
 
     useTitle("Product Page");
 
@@ -32,11 +29,11 @@ function ProductPage() {
 
     let { productId } = useParams();
 
+    const [cart, setCart] = useState(0);
     const [product, setProduct] = useState({});
     const [images, setImages] = useState([]);
     const [isInLikeList, setIsInLikeList] = useState();
     const [isInBookmarkList, setIsInBookmarkList] = useState();
-    const [productCount, setProductCount] = useState(1);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const desktopProductPrevRef = useRef(null);
     const desktopProductNextRef = useRef(null);
@@ -48,7 +45,7 @@ function ProductPage() {
                 setProduct(result);
                 setImages(result.image);
                 setIsInLikeList(result.isLike);
-                setIsInBookmarkList(result.isBookmark)
+                setIsInBookmarkList(result.isBookmark);
             })
             .catch(err => err);
     }, [isInLikeList, isInBookmarkList]);
@@ -101,6 +98,10 @@ function ProductPage() {
         }
     };
 
+    const cartHandler = () => {
+        setCart(prev => prev + 1);
+    };
+
     return (
         <div>
             <Header />
@@ -108,7 +109,7 @@ function ProductPage() {
                 <Breadcrumbs productTitle={product.title} />
                 <div className="flex flex-col bigDesktop:flex-row gap-x-[72px] mt-14 tablet:mt-16 bigDesktop:mt-4">
                     {/* Images */}
-                    <div className="flex flex-col laptop:flex-row-reverse justify-center items-center laptop:gap-6 mb-14 tablet:mb-16 overflow-hidden">
+                    <div className="flex flex-col laptop:flex-row-reverse justify-center items-center laptop:gap-6 mb-6 tablet:mb-16 overflow-hidden">
                         <div className="w-screen laptop:w-[504px] laptop:h-[504px] select-none">
                             <Swiper
                                 slidesPerView={1}
@@ -129,7 +130,7 @@ function ProductPage() {
                                 className="mySwiper2">
                                 {images.map((image, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="bg-grey-1 dark:bg-grey-2 w-[311px] h-[311px] tablet:w-[504px] tablet:h-[504px] mx-auto py-[51px] rounded-[48px] tablet:rounded-[64px]">
+                                        <div className="bg-grey-1 dark:bg-grey-2 w-[225px] h-[225px] tablet:w-[504px] tablet:h-[504px] mx-auto py-[51px] rounded-[48px] tablet:rounded-[64px]">
                                             <img
                                                 src={`/public/images/products/${image}`}
                                                 className="h-full mx-auto"
@@ -141,7 +142,7 @@ function ProductPage() {
                             </Swiper>
                         </div>
 
-                        <div className="flex tablet:hidden justify-center gap-4 mt-10 select-none">
+                        <div className="flex tablet:hidden justify-center gap-4 mt-4 xmobile:mt-10 select-none">
                             <span
                                 className="slider-click-wrapper border hover:border-black dark:border-white/30"
                                 ref={desktopProductPrevRef}>
@@ -180,9 +181,11 @@ function ProductPage() {
                     </div>
 
                     {/* Details */}
-                    <div className="flex flex-col gap-y-10 bigDesktop:gap-y-20 items-center bigDesktop:items-start bigDesktop:justify-center bigDesktop:h-[504px]">
-                        <div>
-                            <SubTitle subtitle="- Selling Fast" />
+                    <div className="flex flex-col gap-y-5 bigDesktop:gap-y-20 px-6 bigDesktop:items-start bigDesktop:justify-center bigDesktop:h-[504px]">
+                        <div className="text-center" >
+                            <span className="hidden">
+                                <SubTitle subtitle="- Selling Fast" />
+                            </span>
                             <Title title={product.title} />
                             <ProductDetails
                                 ability={product.ability}
@@ -190,55 +193,35 @@ function ProductPage() {
                             />
                         </div>
                         <div className="flex flex-wrap justify-center items-center gap-6">
-                            <div className="flex justify-between items-center w-[136px] h-12 tablet:w-[176px] tablet:h-16 py-4 px-2 tablet:p-4 border-2 border-grey-1 dark:border-grey-2 rounded-full select-none">
-                                <div>
-                                    {quantityCount(state, product) > 1 && (
-                                        <span
-                                            className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                            onClick={() =>
-                                                dispatch({ type: "DECREASE", payload: product })
-                                            }>
+                            <div className="flex">
+                                {cart === 0 ? (
+                                    <span
+                                        className="py-3 px-6 tablet:py-4 tablet:px-10 bg-green-100 text-grey-light-100 tablet:text-xl/[32px] font-bold rounded-full cursor-pointer"
+                                        onClick={cartHandler}>
+                                        Add to Cart
+                                    </span>
+                                ) : (
+                                    <div className="flex justify-between items-center w-[136px] h-12 tablet:w-[176px] tablet:h-16 py-4 px-2 tablet:p-4 border-2 border-grey-1 dark:border-grey-2 rounded-full select-none">
+                                        <div>
+                                            <span className="inline-flex justify-center items-center w-8 h-8 cursor-pointer">
+                                                <svg className="w-4 h-4 text-black dark:text-white">
+                                                    <use href="#arrow-left"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <span className="inline-block text-grey-dark-100 dark:text-grey-light-100 font-bold text-xl tablet:text-2xl leading-8">
+                                            0
+                                        </span>
+                                        <span className="inline-flex justify-center items-center w-8 h-8 cursor-pointer">
                                             <svg className="w-4 h-4 text-black dark:text-white">
-                                                <use href="#arrow-left"></use>
+                                                <use href="#arrow-right"></use>
                                             </svg>
                                         </span>
-                                    )}
-                                    {/* {quantityCount(state, product) == 1 && (
-                                        <span
-                                            className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                            onClick={() =>
-                                                dispatch({ type: "REMOVE_ITEM", payload: product })
-                                            }>
-                                            <svg className="w-4 h-4 text-black dark:text-white">
-                                                <use href="#trash"></use>
-                                            </svg>
-                                        </span>
-                                    )} */}
-                                </div>
-                                <span className="inline-block text-grey-dark-100 dark:text-grey-light-100 font-bold text-xl tablet:text-2xl leading-8">
-                                    {state.selectedItems.quantity
-                                        ? state.selectedItems.quantity
-                                        : 0}
-                                </span>
-                                <span
-                                    className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                    onClick={() =>
-                                        dispatch({ type: "INCREASE", payload: product })
-                                    }>
-                                    <svg className="w-4 h-4 text-black dark:text-white">
-                                        <use href="#arrow-right"></use>
-                                    </svg>
-                                </span>
+                                    </div>
+                                )}
                             </div>
 
-                            <div className="flex items-center gap-x-6">
-                                <span
-                                    className="py-3 px-6 tablet:py-4 tablet:px-10 bg-green-100 text-grey-light-100 tablet:text-xl/[32px] font-bold rounded-full cursor-pointer"
-                                    onClick={() =>
-                                        dispatch({ type: "ADD_ITEM", payload: product })
-                                    }>
-                                    Add to Cart
-                                </span>
+                            <div>
                                 <span
                                     className="inline-flex p-3 tablet:p-4 border-2 border-grey-1 dark:border-grey-2 rounded-full cursor-pointer"
                                     onClick={() => addOrRemoveLike(product._id, userInfos._id)}>
@@ -268,7 +251,6 @@ function ProductPage() {
                     </div>
                 </div>
             </div>
-
             <WhyUs />
             <Reviews />
             <Products />

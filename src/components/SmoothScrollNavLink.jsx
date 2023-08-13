@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
 const SmoothScrollNavLink = ({ to, children, className }) => {
-    const handleLinkClick = e => {
+    const handleLinkClick = () => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth",
+            // behavior: "smooth",
         });
     };
 

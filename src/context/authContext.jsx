@@ -4,6 +4,8 @@ const dataContext = {
     isLoggedIn: false,
     token: null,
     userInfos: null,
+    likes: null,
+    bookmarks: null,
     login: () => {},
     logout: () => {},
 };
