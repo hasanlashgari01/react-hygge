@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/authContext";
 
@@ -33,8 +33,13 @@ function Topbar({ image }) {
                 <div className="relative group">
                     <div className="flex justify-between items-center gap-3 p-2 bg-gray-100 dark:bg-gray-700 rounded-full laptop:cursor-pointer transition-custom">
                         <img
-                            src={authContext.userInfos.image ? authContext.userInfos : image}
-                            className="w-8 h-8 rounded-full"
+                            // src={authContext.userInfos.image ? authContext.userInfos : image}
+                            src={
+                                authContext.userInfos.image
+                                    ? `http://localhost:4000/api/admins/avatar/${authContext.userInfos.image}`
+                                    : image
+                            }
+                            className="w-8 h-8 rounded-full object-cover"
                             alt=""
                         />
                         <span className="hidden tablet:inline-block mr-4 text-base font-semibold">
