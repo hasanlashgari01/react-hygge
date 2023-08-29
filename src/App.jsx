@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
 import { routes } from "./router";
 import AuthContext from "./context/authContext";
+import ProductContext from "./context/ProductContext";
 
 function App() {
     const router = useRoutes(routes);
@@ -29,7 +30,7 @@ function App() {
                 })
                 .catch(error => error);
         }
-    }, [likes, bookmarks]);
+    }, []);
 
     const login = (userData, token) => {
         setIsLoggedIn(true);
@@ -49,7 +50,7 @@ function App() {
         <div className="bg-white dark:bg-grey-3 transition-custom">
             <AuthContext.Provider
                 value={{ isLoggedIn, token, userInfos, likes, bookmarks, login, logout }}>
-                {router}
+                <ProductContext>{router}</ProductContext>
             </AuthContext.Provider>
         </div>
     );

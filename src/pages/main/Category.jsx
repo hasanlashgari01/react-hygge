@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { ProductsContext } from "../../context/ProductContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import Breadcrumbs from "../../components/main/Breadcrumbs";
 import NewsLetter from "../../components/main/NewsLetter";
@@ -10,11 +11,12 @@ import useTitle from "../../hooks/useTitle";
 import Footer from "../../layouts/main/Footer";
 import Header from "../../layouts/main/Header";
 
-function CategoryProducts() {
+const CategoryProducts = () => {
     useTitle("Category Products");
+
     const { shortName } = useParams();
+
     const [category, setCategory] = useState({});
-    const [products, setProducts] = useState({});
     const [isPending, setIsPending] = useState(true);
     const [filter, setFilter] = useState({ price: 1, date: 1 });
 
@@ -33,7 +35,6 @@ function CategoryProducts() {
             .then(res => res.json())
             .then(result => {
                 setCategory(result);
-                setProducts(result.products);
                 setIsPending(false);
             });
     }, []);
@@ -124,6 +125,6 @@ function CategoryProducts() {
             <Footer />
         </div>
     );
-}
+};
 
 export default CategoryProducts;

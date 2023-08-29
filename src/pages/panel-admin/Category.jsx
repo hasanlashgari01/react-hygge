@@ -13,7 +13,7 @@ function Category() {
 
     useEffect(() => {
         getAllCategories();
-
+        /* 
         window.addEventListener("keyup", e => {
             e.preventDefault();
 
@@ -22,7 +22,8 @@ function Category() {
                     clearAll();
                 }
             }
-        });
+        }); 
+        */
     }, []);
 
     const getAllCategories = () => {

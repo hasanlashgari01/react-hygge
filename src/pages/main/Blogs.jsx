@@ -19,7 +19,7 @@ function Blogs() {
         <>
             <Header />
             <div className="space-container">
-                <div className="blog-post">
+                <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3">
                     {blogs.map(blog => (
                         <BlogMobile key={blog._id} blog={blog} />
                     ))}

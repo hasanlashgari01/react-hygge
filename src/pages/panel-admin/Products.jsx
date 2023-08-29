@@ -23,6 +23,7 @@ function Products() {
             priceOriginal: "",
             ability: "",
             category: "",
+            image: "",
         },
         validate: values => {
             const errors = {};
@@ -124,7 +125,8 @@ function Products() {
             <ToastContainer />
             <form
                 className="grid gap-5 grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 child:form-wrapper"
-                onSubmit={form.handleSubmit}>
+                onSubmit={form.handleSubmit}
+                encType="multipart/form-data">
                 <div>
                     <input
                         type="text"
@@ -192,6 +194,10 @@ function Products() {
                         ))}
                     </select>
                 </div>
+                <div>
+                    <input type="file" name="image" id="image" />
+                </div>
+
                 <div>
                     <input type="submit" value="Add Product" />
                 </div>

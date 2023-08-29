@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ErrorMessage from "../ErrorMessage";
 import Product from "./Product";
 import SubTitle from "./SubTitle";
 import Title from "./Title";
 import SmoothScrollLink from "../SmoothScrollLink";
+import { ProductsContext } from "../../context/ProductContext";
 
 function Products() {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        fetch("http://localhost:4000/api/products")
-            .then(res => res.json())
-            .then(result => {
-                result && setProducts(result.slice(0, 8));
-            });
-    }, []);
+    const products = useContext(ProductsContext);
 
     return (
         <div className="space-container">
@@ -24,7 +17,7 @@ function Products() {
             </div>
             <div className="grid grid-cols-1 xmobile:grid-cols-2 tablet:grid-cols-3 bigDesktop:grid-cols-4 gap-3.5 mobile:gap-5 desktop:gap-10 gap-y-8 mt-14">
                 {products ? (
-                    products.map(product => <Product key={product._id} product={product} />)
+                    products.map(product => <Product key={product._id} {...product} />)
                 ) : (
                     <ErrorMessage title="There is no products" />
                 )}

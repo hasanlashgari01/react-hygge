@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductsContext } from "../../context/ProductContext";
 
 function Cart() {
-    const [products, setProducts] = useState([1, 2]);
+    const products = useContext(ProductsContext);
     const [productCount, setProductCount] = useState(1);
 
     const decreaseCount = () => {
