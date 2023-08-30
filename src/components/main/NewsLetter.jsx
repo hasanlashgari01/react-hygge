@@ -1,7 +1,21 @@
+import { useState } from "react";
 import SubTitle from "./SubTitle";
 import Title from "./Title";
 
 function NewsLetter() {
+    const [email, setEmail] = useState("");
+
+    const submitHandler = e => {
+        e.preventDefault();
+        fetch("http://localhost:4000/api/news", {
+            method: "POST",
+            body: JSON.stringify({ email }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    };
+
     return (
         <div className="space-container hidden tablet:block">
             <div className="laptop:py-24 laptop:px-[314px] laptop:bg-grey-1 laptop:dark:bg-grey-2 rounded-[48px] desktop:rounded-[56px]">
@@ -9,11 +23,15 @@ function NewsLetter() {
                     <SubTitle subtitle="- Our Newsletter" />
                     <Title title="Sign Up to our Newsletter" />
                 </div>
-                <form className="flex justify-center gap-x-6 mt-10 laptop:mt-12">
+                <form
+                    className="flex justify-center gap-x-6 mt-10 laptop:mt-12"
+                    onSubmit={submitHandler}>
                     <input
                         type="text"
                         className="min-w-[448px] h-16 py-4 px-6 bg-grey-1 dark:bg-grey-4 laptop:bg-white text-grey-4 dark:text-grey-1 text-xl/[32px] font-normal rounded-[32px] outline-none transition-colors"
                         placeholder="Your Email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
                     <input
                         type="submit"
