@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // import { CartContext } from "../../context/CartContext";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -16,25 +16,17 @@ const CategoryProducts = () => {
 
     const { shortName } = useParams();
 
-    const [category, setCategory] = useState({});
+    const [category, setCategory] = useState([]);
+    const [products, setProducts] = useState([]);
     const [isPending, setIsPending] = useState(true);
     const [filter, setFilter] = useState({ price: 1, date: 1 });
 
     useEffect(() => {
-        fetch(
-            `http://localhost:4000/api/categories/${shortName}`
-            /* {
-                ,
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ filter }),
-            } */
-        )
+        fetch(`http://localhost:4000/api/categories/${shortName}`)
             .then(res => res.json())
-            .then(result => {
-                setCategory(result);
+            .then(data => {
+                setProducts(data.products);
+                setCategory(data);
                 setIsPending(false);
             });
     }, []);
@@ -112,7 +104,7 @@ const CategoryProducts = () => {
                             <div className="grid grid-cols-1 xmobile:grid-cols-2 tablet:grid-cols-3 bigDesktop:grid-cols-4 gap-3.5 mobile:gap-5 desktop:gap-10 gap-y-8 mt-14">
                                 {products &&
                                     products.map(product => (
-                                        <Product key={product._id} product={product} />
+                                        <Product key={product._id} {...product} />
                                     ))}
                             </div>
                         </>
