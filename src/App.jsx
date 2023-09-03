@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
 import { routes } from "./router";
 import AuthContext from "./context/authContext";
-import ProductContext from "./context/ProductContext";
+import CartProvider from "./context/CartContext/CartContext";
 
 function App() {
     const router = useRoutes(routes);
@@ -50,7 +50,7 @@ function App() {
         <div className="bg-white dark:bg-grey-3 transition-custom">
             <AuthContext.Provider
                 value={{ isLoggedIn, token, userInfos, likes, bookmarks, login, logout }}>
-                <ProductContext>{router}</ProductContext>
+                <CartProvider>{router}</CartProvider>
             </AuthContext.Provider>
         </div>
     );

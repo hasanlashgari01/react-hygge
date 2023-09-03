@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import propTypes from "prop-types";
 import SmoothScrollLink from "../SmoothScrollLink";
 import ProductDetails from "./ProductDetails";
+import { CartContext } from "../../context/CartContext/CartContext";
 
 function Product({ _id, offPercent, priceOriginal, priceDiscount, title, ability, productImage }) {
+    const { state, dispatch } = useContext(CartContext);
+
     return (
         <div className="bg-grey-1 dark:bg-grey-2 w-64 xmobile:w-48 mobile:w-56 tablet:w-52 laptop:w-[285px] mx-auto p-5 rounded-lg">
             {offPercent && (
@@ -30,7 +34,14 @@ function Product({ _id, offPercent, priceOriginal, priceDiscount, title, ability
                     discount={priceDiscount}
                 />
                 <div className="flex items-center justify-between mt-4">
-                    <button className="hidden laptop:inline-block py-2 px-3 bg-green-200 dark:bg-green-100/5 text-green-800 dark:text-green-400 font-semibold rounded-3xl">
+                    <button
+                        className="hidden laptop:inline-block py-2 px-3 bg-green-200 dark:bg-green-100/5 text-green-800 dark:text-green-400 font-semibold rounded-3xl"
+                        onClick={() =>
+                            dispatch({
+                                type: "ADD_TO_CART",
+                                payload: { _id, title, priceOriginal, productImage },
+                            })
+                        }>
                         Add to cart
                     </button>
                     <span className="inline-block laptop:hidden p-2.5 bg-green-200 dark:bg-green-100/5 text-green-800 dark:text-green-400 rounded-full desktop:cursor-pointer">

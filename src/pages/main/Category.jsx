@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { ProductsContext } from "../../context/ProductContext";
+// import { CartContext } from "../../context/CartContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import Breadcrumbs from "../../components/main/Breadcrumbs";
 import NewsLetter from "../../components/main/NewsLetter";

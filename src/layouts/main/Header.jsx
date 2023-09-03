@@ -1,13 +1,14 @@
-import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import SmoothScrollNavLink from "../../components/SmoothScrollNavLink";
 import AuthContext from "../../context/authContext";
-import { ProductsContext } from "../../context/ProductContext";
+import { CartContext } from "../../context/CartContext/CartContext";
 
 function Header() {
     const { isLoggedIn, userInfos } = useContext(AuthContext);
-    const cart = useContext(ProductsContext);
+    const {
+        state: { cart },
+    } = useContext(CartContext);
 
     const [isShowMenu, setIsShowMenu] = useState(false);
 
@@ -140,10 +141,5 @@ function Header() {
         </>
     );
 }
-
-Header.propTypes = {
-    isShowMenu: PropTypes.bool,
-    isDark: PropTypes.bool,
-};
 
 export default Header;

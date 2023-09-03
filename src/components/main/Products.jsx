@@ -1,13 +1,21 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ErrorMessage from "../ErrorMessage";
 import Product from "./Product";
 import SubTitle from "./SubTitle";
 import Title from "./Title";
 import SmoothScrollLink from "../SmoothScrollLink";
-import { ProductsContext } from "../../context/ProductContext";
 
 function Products() {
-    const products = useContext(ProductsContext);
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:4000/api/products")
+            .then(res => res.json())
+            .then(result => {
+                setProducts(result);
+                // setIsPending(false);
+            });
+    }, []);
 
     return (
         <div className="space-container">
