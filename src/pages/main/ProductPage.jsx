@@ -128,7 +128,7 @@ function ProductPage() {
                                     swiper.params.navigation.nextEl = desktopProductNextRef.current;
                                 }}
                                 className="mySwiper2">
-                                {images.map((image, index) => (
+                                {[0, 1].map((image, index) => (
                                     <SwiperSlide key={index}>
                                         <div className="bg-grey-1 dark:bg-grey-2 w-[225px] h-[225px] tablet:w-[504px] tablet:h-[504px] mx-auto py-[51px] rounded-[48px] tablet:rounded-[64px]">
                                             <img
@@ -167,7 +167,7 @@ function ProductPage() {
                                 watchSlidesProgress={true}
                                 modules={[FreeMode, Navigation, Thumbs]}
                                 className="mySwiper">
-                                {images.map((image, index) => (
+                                {[0, 1].map((image, index) => (
                                     <SwiperSlide key={index}>
                                         <img
                                             src={`/public/images/products/${image}`}
@@ -182,7 +182,7 @@ function ProductPage() {
 
                     {/* Details */}
                     <div className="flex flex-col gap-y-5 bigDesktop:gap-y-20 px-6 bigDesktop:items-start bigDesktop:justify-center bigDesktop:h-[504px]">
-                        <div className="text-center" >
+                        <div className="text-center">
                             <span className="hidden">
                                 <SubTitle subtitle="- Selling Fast" />
                             </span>

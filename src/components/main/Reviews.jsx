@@ -15,6 +15,7 @@ function Reviews({ image }) {
         fetch("http://localhost:4000/api/comments")
             .then(res => res.json())
             .then(result => {
+                console.log(result);
                 setReviews(result.slice(0, 3));
             });
     }, []);
@@ -52,8 +53,12 @@ function Reviews({ image }) {
                         {reviews.map((review, index) => (
                             <SwiperSlide key={index}>
                                 <div className="flex flex-col justify-center laptop:justify-start text-center laptop:text-left">
-                                    <div className="w-20 h-20 mx-auto laptop:mx-0 mb-8 p-2 border-2 border-green-100 rounded-full">
-                                        <img src={image} alt="" />
+                                    <div className="w-20 h-20 mx-auto laptop:mx-0 mb-8 p-2 border-2 border-green-100 rounded-full overflow-hidden">
+                                        <img
+                                            src={`http://localhost:4000/api/admins/avatar/${review.author.image}`}
+                                            alt=""
+                                            className="w-full h-full object-cover rounded-full"
+                                        />
                                     </div>
                                     <h3 className="mb-4 text-green-100 text-xl laptop:text-2xl leading-10 font-semibold">
                                         {review.author.fullName}
