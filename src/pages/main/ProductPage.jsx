@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { FreeMode, Keyboard, Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import AuthContext from "../../context/authContext";
+import { CartContext } from "../../context/CartContext/CartContext";
 import useToken from "../../hooks/useToken";
 import Breadcrumbs from "../../components/main/Breadcrumbs";
 import NewsLetter from "../../components/main/NewsLetter";
@@ -19,9 +20,16 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import {
+    ADD_TO_CART,
+    DECREASE_QUANTITY,
+    INCREASE_QUANTITY,
+    REMOVE_FROM_CART,
+} from "../../context/CartContext/cartActions";
 
 function ProductPage() {
     const { userInfos } = useContext(AuthContext);
+    const { state, dispatch } = useContext(CartContext);
 
     useTitle("Product Page");
 
@@ -29,7 +37,8 @@ function ProductPage() {
 
     let { productId } = useParams();
 
-    const [cart, setCart] = useState(0);
+    const productItem = state.cart.find(item => item._id === productId);
+
     const [product, setProduct] = useState({});
     const [images, setImages] = useState([]);
     const [isInLikeList, setIsInLikeList] = useState();
@@ -96,10 +105,6 @@ function ProductPage() {
                     setIsInBookmarkList(false);
                 });
         }
-    };
-
-    const cartHandler = () => {
-        setCart(prev => prev + 1);
     };
 
     return (
@@ -187,32 +192,38 @@ function ProductPage() {
                                 <SubTitle subtitle="- Selling Fast" />
                             </span>
                             <Title title={product.title} />
-                            <ProductDetails
-                                ability={product.ability}
-                                priceOriginal={product.priceOriginal}
-                            />
+                            <ProductDetails ability={product.ability} priceOriginal={product.priceOriginal} />
                         </div>
                         <div className="flex flex-wrap justify-center items-center gap-6">
                             <div className="flex">
-                                {cart === 0 ? (
+                                {!productItem ? (
                                     <span
                                         className="py-3 px-6 tablet:py-4 tablet:px-10 bg-green-100 text-grey-light-100 tablet:text-xl/[32px] font-bold rounded-full cursor-pointer"
-                                        onClick={cartHandler}>
+                                        onClick={() => dispatch({ type: ADD_TO_CART, payload: product })}>
                                         Add to Cart
                                     </span>
                                 ) : (
                                     <div className="flex justify-between items-center w-[136px] h-12 tablet:w-[176px] tablet:h-16 py-4 px-2 tablet:p-4 border-2 border-grey-1 dark:border-grey-2 rounded-full select-none">
                                         <div>
-                                            <span className="inline-flex justify-center items-center w-8 h-8 cursor-pointer">
+                                            <span
+                                                className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
+                                                onClick={() => {
+                                                    productItem.qty > 1
+                                                        ? dispatch({ type: DECREASE_QUANTITY, payload: product })
+                                                        : dispatch({ type: REMOVE_FROM_CART, payload: product });
+                                                }}>
                                                 <svg className="w-4 h-4 text-black dark:text-white">
-                                                    <use href="#arrow-left"></use>
+                                                    <use
+                                                        href={`#${productItem.qty > 1 ? "arrow-left" : "trash"}`}></use>
                                                 </svg>
                                             </span>
                                         </div>
                                         <span className="inline-block text-grey-dark-100 dark:text-grey-light-100 font-bold text-xl tablet:text-2xl leading-8">
-                                            0
+                                            {productItem ? productItem.qty : 0}
                                         </span>
-                                        <span className="inline-flex justify-center items-center w-8 h-8 cursor-pointer">
+                                        <span
+                                            className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
+                                            onClick={() => dispatch({ type: INCREASE_QUANTITY, payload: product })}>
                                             <svg className="w-4 h-4 text-black dark:text-white">
                                                 <use href="#arrow-right"></use>
                                             </svg>
