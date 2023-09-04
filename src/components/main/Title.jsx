@@ -3,7 +3,7 @@ import propTypes from "prop-types";
 function Title({ title }) {
     return (
         <>
-            <h1 className="max-w-[335px] tablet:max-w-full text-grey-dark-100 dark:text-grey-light-100 text-lg mobile:text-[32px] tablet:text-[40px] font-bold  laptop:leading-[48px] tablet:leading-[56px]">
+            <h1 className="max-w-[335px] tablet:w-[500px] text-grey-dark-100 dark:text-grey-light-100 text-lg mobile:text-3xl/10 tablet:text-4xl/[56px] font-bold">
                 {title}
             </h1>
         </>
