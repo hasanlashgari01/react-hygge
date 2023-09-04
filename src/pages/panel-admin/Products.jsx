@@ -6,6 +6,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 import SwalModal from "../../util/SwalModal";
 import toastCustom from "../../util/toast";
 import useToken from "../../hooks/useToken";
+import { firstLetterUpperCase } from "../../util/func";
 
 function Products() {
     const navigate = useNavigate();
@@ -17,7 +18,6 @@ function Products() {
     const token = useToken();
     const form = useFormik({
         initialValues: {
-            image: "product",
             title: "",
             description: "",
             priceOriginal: "",
@@ -81,14 +81,20 @@ function Products() {
     };
 
     const handleSubmit = values => {
-        console.log(values);
+        const formData = new FormData();
+        formData.append("title", values.title);
+        formData.append("description", values.description);
+        formData.append("priceOriginal", values.priceOriginal);
+        formData.append("ability", values.ability);
+        formData.append("category", values.category);
+        formData.append("image", values.image);
+        
         fetch("http://localhost:4000/api/products", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(values),
+            body: formData,
         })
             .then(res => res.json())
             .then(() => {
@@ -147,9 +153,7 @@ function Products() {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                     />
-                    {form.errors.description && form.touched.description && (
-                        <span>{form.errors.description}</span>
-                    )}
+                    {form.errors.description && form.touched.description && <span>{form.errors.description}</span>}
                 </div>
                 <div>
                     <input
@@ -173,9 +177,7 @@ function Products() {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                     />
-                    {form.errors.ability && form.touched.ability && (
-                        <span>{form.errors.ability}</span>
-                    )}
+                    {form.errors.ability && form.touched.ability && <span>{form.errors.ability}</span>}
                 </div>
                 <div>
                     <select
@@ -189,13 +191,22 @@ function Products() {
                         </option>
                         {categories.map(category => (
                             <option key={category._id} value={category._id}>
-                                {category.title}
+                                {firstLetterUpperCase(category.title)}
                             </option>
                         ))}
                     </select>
                 </div>
                 <div>
-                    <input type="file" name="image" id="image" />
+                    <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        onChange={e => {
+                            if (e.currentTarget.files) {
+                                form.setFieldValue("image", e.currentTarget.files[0]);
+                            }
+                        }}
+                    />
                 </div>
 
                 <div>
@@ -232,7 +243,7 @@ function Products() {
                                         className="h-full object-cover"
                                     />
                                 </td>
-                                <td>{product.title}</td>
+                                <td>{firstLetterUpperCase(product.title)}</td>
                                 <td>{product.description}</td>
                                 <td>{product.priceOriginal}</td>
                                 <td className="flex gap-x-5 px-4 py-2">
