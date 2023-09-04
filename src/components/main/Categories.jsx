@@ -88,9 +88,11 @@ function Categories() {
                                 <SmoothScrollLink
                                     to={`http://localhost:5173/category/${category.shortName}`}
                                     className="group inline-flex flex-col justify-center items-center w-32 h-32 bg-grey-1 dark:bg-grey-2 hover:bg-green-100/70 dark:hover:bg-green-100/70 rounded-3xl transition-custom">
-                                    <svg className="w-8 h-8 text-green-100 group-hover:text-white transition-colors">
-                                        <use href={`#${category.icon}`}></use>
-                                    </svg>
+                                    <img
+                                        src={`http://localhost:4000/api/categories/icon/${category.icon}`}
+                                        className="text-white"
+                                        alt=""
+                                    />
                                     <h3 className="mt-4 text-grey-dark-100 dark:text-grey-light-100 font-semibold select-none">
                                         {category.title}
                                     </h3>

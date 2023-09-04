@@ -15,7 +15,6 @@ function Reviews() {
         fetch("http://localhost:4000/api/comments")
             .then(res => res.json())
             .then(result => {
-                console.log(result);
                 setReviews(result.slice(0, 3));
             });
     }, []);
