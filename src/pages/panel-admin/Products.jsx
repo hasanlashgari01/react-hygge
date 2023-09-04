@@ -214,7 +214,7 @@ function Products() {
             <table className="table">
                 <thead>
                     <tr>
-                        {/* <th className="border py-2.5">Image</th> */}
+                        <th className="w-32 py-2.5">Image</th>
                         <th className="w-60">Product</th>
                         <th className="w-1/3">Description</th>
                         <th>Price</th>
@@ -225,18 +225,24 @@ function Products() {
                     <tbody>
                         {products.map(product => (
                             <tr key={product._id}>
-                                {/* <td>{product.image}</td> */}
+                                <td className="flex justify-center h-12 w-16">
+                                    <img
+                                        src={`http://localhost:4000/api/products/cover/${product.productImage}`}
+                                        alt=""
+                                        className="h-full object-cover"
+                                    />
+                                </td>
                                 <td>{product.title}</td>
                                 <td>{product.description}</td>
                                 <td>{product.priceOriginal}</td>
                                 <td className="flex gap-x-5 px-4 py-2">
-                                    <span className="p-1 bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">
+                                    <span className="p-1 w-min bg-blue-100/10 text-blue-100 rounded-md laptop:cursor-pointer">
                                         <svg className="w-6 h-6">
                                             <use href="#pencil-square"></use>
                                         </svg>
                                     </span>
                                     <span
-                                        className="p-1 bg-red/10 text-red rounded-md laptop:cursor-pointer"
+                                        className="p-1 w-min bg-red/10 text-red rounded-md laptop:cursor-pointer"
                                         onClick={() =>
                                             setIsModal({
                                                 status: "pending",
