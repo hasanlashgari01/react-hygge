@@ -73,68 +73,75 @@ function Cart() {
     return (
         <>
             <div className="flex flex-col desktop:flex-row gap-[18px] mb-24 laptop:mb-28 bigDesktop:mb-36">
-                <div className="flex w-full bigDesktop:flex-1 flex-col gap-y-6 tablet:gap-y-8">
-                    {totalQty > 0 &&
-                        state.cart.map((product, index) => (
-                            <div
-                                key={index}
-                                className="flex flex-col mobile:flex-row gap-x-7 w-full p-3 mobile:p-6 laptop:mx-auto border border-[#cbcbcb] dark:border-grey-2 rounded-xl mobile:rounded-2xl">
-                                <div className="bg-grey-1 dark:bg-grey-2 w-[106px] h-[106px] mx-auto mb-4 tablet:m-0 py-2 tablet:py-4 rounded-2xl">
-                                    <img
-                                        src={`http://localhost:4000/api/products/cover/${product.productImage}`}
-                                        className="h-full mx-auto"
-                                        alt=""
-                                    />
-                                </div>
-
-                                <div className="flex flex-col justify-between items-center mobile:items-start py-0.5 mobile:flex-1">
-                                    <div className="flex flex-col mobile:flex-row justify-center mobile:justify-between items-center mobile:items-start w-full mb-4 mobile:mb-0">
-                                        <h3 className="w-80 text-grey-dark-100 dark:text-grey-light-100 text-lg/8 desktop:text-lg/6 font-semibold text-center tablet:text-left text-ellipsis">
-                                            {product.title}
-                                        </h3>
-                                        <h5 className="mt-4 mobile:mt-0 text-grey-dark-100 dark:text-grey-light-100 text-lg/8 desktop:text-lg/6 font-semibold">
-                                            ${product.priceOriginal}
-                                        </h5>
+                <div className="flex w-full bigDesktop:flex-1">
+                    <div className="max-h-[480px] overflow-auto flex w-full bigDesktop:flex-1 flex-col gap-y-6 tablet:gap-y-8">
+                        {totalQty > 0 &&
+                            state.cart.map((product, index) => (
+                                <div
+                                    key={index}
+                                    className="flex flex-col mobile:flex-row gap-x-7 w-full p-3 mobile:p-6 laptop:mx-auto border border-[#cbcbcb] dark:border-grey-2 rounded-xl mobile:rounded-2xl">
+                                    <div className="bg-grey-1 dark:bg-grey-2 w-[106px] h-[106px] mx-auto mb-4 tablet:m-0 py-2 tablet:py-4 rounded-2xl">
+                                        <img
+                                            src={`http://localhost:4000/api/products/cover/${product.productImage}`}
+                                            className="h-full mx-auto"
+                                            alt=""
+                                        />
                                     </div>
 
-                                    <div className="flex mobile:flex-1 w-full justify-center items-center mobile:justify-start gap-6">
-                                        <div className="flex justify-between items-center w-[136px] h-12 desktop:w-[176px] tablet:h-[50px] py-4 px-2 desktop:p-4 border border-[#cbcbcb] dark:border-grey-2 rounded-full select-none">
-                                            <span
-                                                className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                                onClick={() => {
-                                                    product.qty > 1
-                                                        ? dispatch({ type: DECREASE_QUANTITY, payload: product })
-                                                        : dispatch({ type: REMOVE_FROM_CART, payload: product });
-                                                }}>
-                                                <svg className="w-4 h-4 text-black dark:text-white">
-                                                    <use href={`#${product.qty > 1 ? "arrow-left" : "trash"}`}></use>
-                                                </svg>
-                                            </span>
-                                            <span className="inline-block text-grey-dark-100 dark:text-grey-light-100 font-bold text-xl tablet:text-2xl leading-8">
-                                                {product.qty}
-                                            </span>
-                                            <span
-                                                className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                                onClick={() => dispatch({ type: INCREASE_QUANTITY, payload: product })}>
-                                                <svg className="w-4 h-4 text-black dark:text-white">
-                                                    <use href="#arrow-right"></use>
-                                                </svg>
-                                            </span>
+                                    <div className="flex flex-col justify-between items-center mobile:items-start py-0.5 mobile:flex-1">
+                                        <div className="flex flex-col mobile:flex-row justify-center mobile:justify-between items-center mobile:items-start w-full mb-4 mobile:mb-0">
+                                            <h3 className="w-80 text-grey-dark-100 dark:text-grey-light-100 text-lg/8 desktop:text-lg/6 font-semibold text-center tablet:text-left text-ellipsis">
+                                                {product.title}
+                                            </h3>
+                                            <h5 className="mt-4 mobile:mt-0 text-grey-dark-100 dark:text-grey-light-100 text-lg/8 desktop:text-lg/6 font-semibold">
+                                                ${product.priceOriginal}
+                                            </h5>
                                         </div>
 
-                                        <div className="flex items-center">
-                                            <span
-                                                className="inline-flex p-3 tablet:p-4 border border-[#cbcbcb] dark:border-grey-2 rounded-full cursor-pointer"
-                                                onClick={() => dispatch({ type: REMOVE_FROM_CART, payload: product })}>
-                                                <svg className="w-4 h-4 text-black dark:text-white">
-                                                    <use href="#close"></use>
-                                                </svg>
-                                            </span>
+                                        <div className="flex mobile:flex-1 w-full justify-center items-center mobile:justify-start gap-6">
+                                            <div className="flex justify-between items-center w-[136px] h-12 desktop:w-[176px] tablet:h-[50px] py-4 px-2 desktop:p-4 border border-[#cbcbcb] dark:border-grey-2 rounded-full select-none">
+                                                <span
+                                                    className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
+                                                    onClick={() => {
+                                                        product.qty > 1
+                                                            ? dispatch({ type: DECREASE_QUANTITY, payload: product })
+                                                            : dispatch({ type: REMOVE_FROM_CART, payload: product });
+                                                    }}>
+                                                    <svg className="w-4 h-4 text-black dark:text-white">
+                                                        <use
+                                                            href={`#${product.qty > 1 ? "arrow-left" : "trash"}`}></use>
+                                                    </svg>
+                                                </span>
+                                                <span className="inline-block text-grey-dark-100 dark:text-grey-light-100 font-bold text-xl tablet:text-2xl leading-8">
+                                                    {product.qty}
+                                                </span>
+                                                <span
+                                                    className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
+                                                    onClick={() =>
+                                                        dispatch({ type: INCREASE_QUANTITY, payload: product })
+                                                    }>
+                                                    <svg className="w-4 h-4 text-black dark:text-white">
+                                                        <use href="#arrow-right"></use>
+                                                    </svg>
+                                                </span>
+                                            </div>
+
+                                            <div className="flex items-center">
+                                                <span
+                                                    className="inline-flex p-3 tablet:p-4 border border-[#cbcbcb] dark:border-grey-2 rounded-full cursor-pointer"
+                                                    onClick={() =>
+                                                        dispatch({ type: REMOVE_FROM_CART, payload: product })
+                                                    }>
+                                                    <svg className="w-4 h-4 text-black dark:text-white">
+                                                        <use href="#close"></use>
+                                                    </svg>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                    </div>
 
                     {totalQty == 0 && <ErrorMessage title="Your cart is empty" />}
                 </div>
