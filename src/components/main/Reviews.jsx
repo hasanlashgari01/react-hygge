@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SubTitle from "./SubTitle";
 import Title from "./Title";
 
-function Reviews({ image }) {
+function Reviews() {
     const [reviews, setReviews] = useState([]);
     const desktopReviewsPrevRef = useRef(null);
     const desktopReviewsNextRef = useRef(null);

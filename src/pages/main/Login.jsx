@@ -79,7 +79,7 @@ function Login() {
                     className="laptop:w-[496px] laptop:mx-auto mt-14 tablet:mt-16 bigDesktop:mt-[72px]"
                     onSubmit={form.handleSubmit}>
                     <div className="child:form-wrapper">
-                        <div className="mb-5">
+                        <div>
                             <input
                                 type="email"
                                 name="email"
@@ -87,6 +87,7 @@ function Login() {
                                 value={form.values.email}
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
+                                className="mt-10"
                             />
                             {form.errors.email && form.touched.email && (
                                 <span>{form.errors.email}</span>
@@ -100,6 +101,7 @@ function Login() {
                                 value={form.values.password}
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
+                                className="mt-10"
                             />
                             {form.errors.password && form.touched.password && (
                                 <span>{form.errors.password}</span>

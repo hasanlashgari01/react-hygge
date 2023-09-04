@@ -137,10 +137,9 @@
         @apply relative flex flex-col justify-center w-full;
     }
 
-    .form-wrapper > input[type="text"],
-    .form-wrapper > input[type="number"],
+    .form-wrapper > input,
     .form-wrapper > select {
-        @apply px-4 py-2 dark:bg-grey-4 text-grey-dark-100 dark:text-white/90 text-base font-semibold leading-6 outline-grey-1 dark:outline-grey-2 focus:outline-green-100 dark:focus:outline-green-100 rounded-md transition-custom;
+        @apply h-fit px-4 py-2 dark:bg-grey-4 text-grey-dark-100 dark:text-white/90 text-base font-semibold leading-6 border-2 border-grey-dark-24 outline-grey-1 dark:outline-grey-2 focus:outline-green-100 dark:focus:outline-green-100 rounded-md transition-custom;
     }
 
     .form-wrapper input[type="submit"] {
@@ -148,7 +147,7 @@
     }
 
     .form-wrapper span {
-        @apply absolute -bottom-6 py-0.5 px-2 bg-red/20 text-red/95 text-sm font-bold;
+        @apply absolute -bottom-7 py-0.5 px-2 bg-red/20 text-red/95 text-xs laptop:text-sm font-medium;
     }
 
     .p-admin__link {

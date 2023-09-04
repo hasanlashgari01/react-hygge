@@ -85,7 +85,7 @@ function Register() {
                 </div>
 
                 <form
-                    className="laptop:w-[496px] laptop:mx-auto mt-14 tablet:mt-16 bigDesktop:mt-[72px]"
+                    className="laptop:w-[496px] laptop:mx-auto"
                     onSubmit={form.handleSubmit}>
                     <div className="child:form-wrapper">
                         <div>
@@ -96,6 +96,7 @@ function Register() {
                                 value={form.values.fullName}
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
+                                className="mt-10"
                             />
                             {form.errors.fullName && form.touched.fullName && (
                                 <span>{form.errors.fullName}</span>
@@ -109,6 +110,7 @@ function Register() {
                                 value={form.values.username}
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
+                                className="mt-10"
                             />
                             {form.errors.username && form.touched.username && (
                                 <span>{form.errors.username}</span>
@@ -122,6 +124,7 @@ function Register() {
                                 value={form.values.email}
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
+                                className="mt-10"
                             />
                             {form.errors.email && form.touched.email && (
                                 <span>{form.errors.email}</span>
@@ -135,6 +138,7 @@ function Register() {
                                 value={form.values.password}
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
+                                className="mt-10"
                             />
                             {form.errors.password && form.touched.password && (
                                 <span>{form.errors.password}</span>
@@ -148,18 +152,19 @@ function Register() {
                                 value={form.values.confirmPassword}
                                 onChange={form.handleChange}
                                 onBlur={form.handleBlur}
+                                className="mt-10"
                             />
                             {form.errors.confirmPassword && form.touched.confirmPassword && (
                                 <span>{form.errors.confirmPassword}</span>
                             )}
                         </div>
                     </div>
-                    <div>
+                    {/* <div>
                         <div className="bigDesktop:mt-6 w-full h-0.5 bg-grey-1 dark:bg-grey-2 rounded-2xl overflow-hidden">
                             <div className="w-1/5 h-full bg-green-100 transition-all duration-500"></div>
                         </div>
                         <span>Message</span>
-                    </div>
+                    </div> */}
                     <div className="mt-10 tablet:mt-12">
                         <input id="agree-terms" type="checkbox" className="w-4 h-4" />
                         <label
