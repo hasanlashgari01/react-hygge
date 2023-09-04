@@ -6,9 +6,9 @@ function UserPanel() {
     return (
         <div>
             <Header />
-            <div className="space-container flex gap-x-[18px] mt-10">
+            <div className="container flex gap-x-[18px] mt-10">
                 <Sidebar status="hidden" />
-                <div className="flex-1">
+                <div className="w-full xmobile:flex-1">
                     <Outlet />
                 </div>
             </div>

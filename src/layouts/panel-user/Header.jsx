@@ -16,7 +16,7 @@ function Header({ image }) {
     };
 
     return (
-        <div className="sticky top-0 flex w-screen tablet:w-full justify-between items-center py-3 px-10 shadow-md z-50 sidebar">
+        <div className="sticky top-0 flex tablet:w-full justify-between items-center py-3 px-10 shadow-md z-50 sidebar">
             <span className="hidden laptop:inline-block text-xl font-semibold">
                 Hello, {authContext.userInfos.fullName}
             </span>

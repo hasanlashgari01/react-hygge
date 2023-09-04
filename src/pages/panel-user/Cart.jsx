@@ -2,11 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import { CartContext } from "../../context/CartContext/CartContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import Swal from "sweetalert2";
-import {
-    DECREASE_QUANTITY,
-    INCREASE_QUANTITY,
-    REMOVE_FROM_CART,
-} from "../../context/CartContext/cartActions";
+import { DECREASE_QUANTITY, INCREASE_QUANTITY, REMOVE_FROM_CART } from "../../context/CartContext/cartActions";
 
 function Cart() {
     const { state, dispatch } = useContext(CartContext);
@@ -77,7 +73,7 @@ function Cart() {
     return (
         <>
             <div className="flex flex-col desktop:flex-row gap-[18px] mb-24 laptop:mb-28 bigDesktop:mb-36">
-                <div className="flex bigDesktop:flex-1 flex-col gap-y-6 tablet:gap-y-8">
+                <div className="flex w-full bigDesktop:flex-1 flex-col gap-y-6 tablet:gap-y-8">
                     {totalQty > 0 &&
                         state.cart.map((product, index) => (
                             <div
@@ -107,20 +103,11 @@ function Cart() {
                                                 className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
                                                 onClick={() => {
                                                     product.qty > 1
-                                                        ? dispatch({
-                                                              type: DECREASE_QUANTITY,
-                                                              payload: product,
-                                                          })
-                                                        : dispatch({
-                                                              type: REMOVE_FROM_CART,
-                                                              payload: product,
-                                                          });
+                                                        ? dispatch({ type: DECREASE_QUANTITY, payload: product })
+                                                        : dispatch({ type: REMOVE_FROM_CART, payload: product });
                                                 }}>
                                                 <svg className="w-4 h-4 text-black dark:text-white">
-                                                    <use
-                                                        href={`#${
-                                                            product.qty > 1 ? "arrow-left" : "trash"
-                                                        }`}></use>
+                                                    <use href={`#${product.qty > 1 ? "arrow-left" : "trash"}`}></use>
                                                 </svg>
                                             </span>
                                             <span className="inline-block text-grey-dark-100 dark:text-grey-light-100 font-bold text-xl tablet:text-2xl leading-8">
@@ -128,12 +115,7 @@ function Cart() {
                                             </span>
                                             <span
                                                 className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                                onClick={() =>
-                                                    dispatch({
-                                                        type: INCREASE_QUANTITY,
-                                                        payload: product,
-                                                    })
-                                                }>
+                                                onClick={() => dispatch({ type: INCREASE_QUANTITY, payload: product })}>
                                                 <svg className="w-4 h-4 text-black dark:text-white">
                                                     <use href="#arrow-right"></use>
                                                 </svg>
@@ -143,12 +125,7 @@ function Cart() {
                                         <div className="flex items-center">
                                             <span
                                                 className="inline-flex p-3 tablet:p-4 border border-[#cbcbcb] dark:border-grey-2 rounded-full cursor-pointer"
-                                                onClick={() =>
-                                                    dispatch({
-                                                        type: REMOVE_FROM_CART,
-                                                        payload: product,
-                                                    })
-                                                }>
+                                                onClick={() => dispatch({ type: REMOVE_FROM_CART, payload: product })}>
                                                 <svg className="w-4 h-4 text-black dark:text-white">
                                                     <use href="#close"></use>
                                                 </svg>
@@ -163,11 +140,9 @@ function Cart() {
                 </div>
 
                 <div className="p-8 tablet:p-6 w-full bigDesktop:w-[325px] h-fit border border-[#cbcbcb] dark:border-grey-2 rounded-xl tablet:rounded-2xl">
-                    <h1 className="text-grey-dark-100 dark:text-grey-light-100 text-2xl/8 font-bold">
-                        Cart Total
-                    </h1>
+                    <h1 className="text-grey-dark-100 dark:text-grey-light-100 text-2xl/8 font-bold">Cart Total</h1>
 
-                    <div className="grid grid-cols-1 mobile:grid-cols-2 desktop:grid-cols-1 gap-5 tablet:gap-32 laptop:gap-y-6 laptop:gap-x-24 mt-5 tablet:mt-6 mb-7 tablet:mb-10">
+                    <div className="flex flex-col gap-5 tablet:gap-32 laptop:gap-y-6 laptop:gap-x-24 mt-5 tablet:mt-6 mb-7 tablet:mb-10">
                         {/* 
                         <div className="flex justify-between items-center text-grey-dark-100 dark:text-grey-light-100">
                             <span className="text-xl/10 font-normal">Subtotal:</span>
