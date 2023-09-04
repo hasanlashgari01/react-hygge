@@ -133,7 +133,12 @@ function Category() {
                                             onChange={() => removeCategory(category._id)}
                                         />
                                     </td>
-                                    <td>{category.icon}</td>
+                                    <td className="w-4 h-4 overflow-hidden" >
+                                        <img
+                                            src={`http://localhost:4000/api/categories/icon/${category.icon}`}
+                                            alt=""
+                                        />
+                                    </td>
                                     <td>{category.title}</td>
                                     <td className="px-4 py-2">{category.shortName}</td>
                                     <td className="flex gap-x-5 px-4 py-2">
