@@ -50,7 +50,7 @@ function Blog() {
                     className="mySwiper tablet:hidden">
                     {blogs.map(blog => (
                         <SwiperSlide key={blog._id}>
-                            <BlogMobile blog={blog} />
+                            <BlogMobile key={blog._id} {...blog} />
                         </SwiperSlide>
                     ))}
 
@@ -74,7 +74,7 @@ function Blog() {
 
                 <div className="grid tablet:grid-cols-2 desktop:grid-cols-3 gap-12 mt-12">
                     {blogs.map(blog => (
-                        <BlogTablet key={blog._id} blog={blog} />
+                        <BlogTablet key={blog._id} {...blog} />
                     ))}
                 </div>
             </div>
