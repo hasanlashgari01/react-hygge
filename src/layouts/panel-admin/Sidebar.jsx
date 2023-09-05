@@ -5,8 +5,6 @@ import useTheme from "../../hooks/useTheme";
 function Sidebar() {
     const [isDark, themeHandler] = useTheme();
 
-    const id = useId();
-
     const links = [
         { to: "index", icon: "home", title: "Home" },
         { to: "users", icon: "users", title: "Users" },
@@ -23,8 +21,8 @@ function Sidebar() {
         <div className="relative hidden laptop:block w-64 h-screen p-3 sidebar">
             <div className="sticky top-5">
                 <nav>
-                    {links.map(link => (
-                        <ul key={id} className="flex flex-col">
+                    {links.map((link, index) => (
+                        <ul key={index} className="flex flex-col">
                             <NavLink to={link.to} className={navLinkStyle}>
                                 <svg className="w-5 h-5">
                                     <use href={`#${link.icon}`}></use>

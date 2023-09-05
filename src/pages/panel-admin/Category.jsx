@@ -118,7 +118,6 @@ function Category() {
             })
                 .then(res => res.json())
                 .then(() => {
-                    console.log("ok");
                     getAllCategories();
                 });
         }
