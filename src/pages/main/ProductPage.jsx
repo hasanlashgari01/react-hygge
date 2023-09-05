@@ -37,7 +37,7 @@ function ProductPage() {
 
     let { productId } = useParams();
 
-    const productItem = state.cart.find(item => item._id === productId);
+    const productItem = state.cart.find(product => product._id === productId);
 
     const [product, setProduct] = useState({});
     const [images, setImages] = useState([]);
@@ -46,6 +46,7 @@ function ProductPage() {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const desktopProductPrevRef = useRef(null);
     const desktopProductNextRef = useRef(null);
+
 
     useEffect(() => {
         fetch(`http://localhost:4000/api/products/${productId}`)
@@ -57,7 +58,7 @@ function ProductPage() {
                 setIsInBookmarkList(result.isBookmark);
             })
             .catch(err => err);
-    }, [isInLikeList, isInBookmarkList]);
+    }, [isInLikeList, isInBookmarkList, product]);
 
     const addOrRemoveLike = (productId, userId) => {
         if (!isInLikeList) {
@@ -209,12 +210,11 @@ function ProductPage() {
                                                 className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
                                                 onClick={() => {
                                                     productItem.qty > 1
-                                                        ? dispatch({ type: DECREASE_QUANTITY, payload: product })
-                                                        : dispatch({ type: REMOVE_FROM_CART, payload: product });
+                                                        ? dispatch({ type: DECREASE_QUANTITY, payload: productItem })
+                                                        : dispatch({ type: REMOVE_FROM_CART, payload: productItem });
                                                 }}>
                                                 <svg className="w-4 h-4 text-black dark:text-white">
-                                                    <use
-                                                        href={`#${productItem.qty > 1 ? "arrow-left" : "trash"}`}></use>
+                                                    <use href={`#${productItem.qty > 1 ? "arrow-left" : "trash"}`}></use>
                                                 </svg>
                                             </span>
                                         </div>
@@ -223,7 +223,7 @@ function ProductPage() {
                                         </span>
                                         <span
                                             className="inline-flex justify-center items-center w-8 h-8 cursor-pointer"
-                                            onClick={() => dispatch({ type: INCREASE_QUANTITY, payload: product })}>
+                                            onClick={() => dispatch({ type: INCREASE_QUANTITY, payload: productItem })}>
                                             <svg className="w-4 h-4 text-black dark:text-white">
                                                 <use href="#arrow-right"></use>
                                             </svg>
