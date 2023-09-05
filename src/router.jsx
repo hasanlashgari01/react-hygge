@@ -24,6 +24,7 @@ import PAdminProducts from "./pages/panel-admin/Products";
 import PAdminCategories from "./pages/panel-admin/Category";
 import Profile from "./pages/panel-admin/Profile";
 import PAdminUsers from "./pages/panel-admin/Users";
+import PAdminBlogs from "./pages/panel-admin/Blog";
 // User Dashboard
 import UserPanel from "./pages/panel-user/UserPanel";
 import PUserCart from "./pages/panel-user/Cart";
@@ -73,6 +74,7 @@ export const routes = [
             { path: "products", element: <PAdminProducts /> },
             { path: "category", element: <PAdminCategories /> },
             { path: "off", element: <PAdminOff /> },
+            { path: "blog", element: <PAdminBlogs /> },
             { path: "profile", element: <Profile /> },
         ],
     },
