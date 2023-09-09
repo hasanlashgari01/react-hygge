@@ -13,6 +13,7 @@ function Products() {
 
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [search, setSearch] = useState("");
 
     const [setIsModal] = SwalModal();
     const token = useToken();
@@ -88,7 +89,7 @@ function Products() {
         formData.append("ability", values.ability);
         formData.append("category", values.category);
         formData.append("image", values.image);
-        
+
         fetch("http://localhost:4000/api/products", {
             method: "POST",
             headers: {
@@ -125,6 +126,18 @@ function Products() {
         getAllCategories();
         getAllProducts();
     }, []);
+
+    const searchHandler = e => {
+        setSearch(e.target.value);
+        if (e.target.value !== "") {
+            const filteredProducts = products.filter(product => {
+                return product.title.toLowerCase().includes(e.target.value.toLowerCase());
+            });
+            setProducts(filteredProducts);
+        } else {
+            getAllProducts();
+        }
+    };
 
     return (
         <>
@@ -219,6 +232,8 @@ function Products() {
                         type="text"
                         className="dark:bg-grey-4 dark:text-white/90 py-2 px-4 w-full mobile:w-1/2 desktop:w-1/3 outline-0 rounded-md"
                         placeholder="Search Product"
+                        value={search}
+                        onChange={searchHandler}
                     />
                 </div>
             </div>
