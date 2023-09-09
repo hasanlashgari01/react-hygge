@@ -13,7 +13,6 @@ const config = {
 
 const toastCustom = (status, message) => {
     if (status === "success") {
-        console.log(status, message);
         toast.success(message, config);
     } else if (status === "info") {
         toast.info(message, config);
