@@ -6,7 +6,7 @@ function LoginPrivate({ children }) {
     const { isLoggedIn } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    return <>{!isLoggedIn ? <>{children}</> : navigate("/")}</>;
+    return !isLoggedIn ? <>{children}</> : navigate("/");
 }
 
 export default LoginPrivate;

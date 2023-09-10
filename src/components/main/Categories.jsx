@@ -13,9 +13,10 @@ function Categories() {
     const desktopNavigationNextRef = useRef(null);
 
     useEffect(() => {
-        fetch("http://localhost:4000/api/categories")
+        fetch("https://node-hygge.iran.liara.run/api/categories")
             .then(res => res.json())
             .then(result => {
+                console.log(result);
                 setCategories(result);
             });
     }, []);

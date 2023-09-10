@@ -69,8 +69,10 @@ function Register() {
             },
             body: JSON.stringify(values),
         }).then(res => {
+            if (res.status == 201) {
+                toastCustom("success", "Create account was successfully \n Please Login");
+            }
             res.status == 400 && toastCustom("error", "Try another email or username");
-            res.status == 201 && toastCustom("success", "Create account was successfully");
         });
     };
 
